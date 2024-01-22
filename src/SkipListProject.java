@@ -36,54 +36,57 @@ import java.util.Scanner;
  */
 public class SkipListProject {
 
-	/**
-	 * The entry point of the application.
-	 *
-	 * @param args The name of the command file passed in as a command line
-	 *             argument.
-	 */
-	public static void main(String[] args) {
+    /**
+     * The entry point of the application.
+     *
+     * @param args
+     *            The name of the command file passed in as a command line
+     *            argument.
+     */
+    public static void main(String[] args) {
 
-		// the file containing the commands
-		File file = null;
+        // the file containing the commands
+        File file = null;
 
-		// Attempts to open the file and scan through it
-		try {
+        // Attempts to open the file and scan through it
+        try {
 
-			// takes the first command line argument and opens that file
-			file = new File(args[0]);
+            // takes the first command line argument and opens that file
+            file = new File(args[0]);
 
-			// creates a scanner object
-			Scanner scanner = new Scanner(file);
+            // creates a scanner object
+            Scanner scanner = new Scanner(file);
 
-			// creates a command processor object
-			CommandProcessor cmdProc = new CommandProcessor();
+            // creates a command processor object
+            CommandProcessor cmdProc = new CommandProcessor();
 
-			// reads the entire file and processes the commands
-			// line by line
-			while (scanner.hasNextLine()) {
-				String line = scanner.nextLine();
-				// determines if the file has more lines to read
-				if (!line.trim().isEmpty()) {
-					cmdProc.processor(line.trim());
-				}
-			}
-			// closes the scanner
-			scanner.close();
-		}
-		// catches the exception if the file cannot be found
-		// and outputs the correct information to the console
-		catch (FileNotFoundException e) {
-			System.out.println("Invalid file");
-			e.printStackTrace();
-		}
+            // reads the entire file and processes the commands
+            // line by line
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                // determines if the file has more lines to read
+                if (!line.trim().isEmpty()) {
+                    cmdProc.processor(line.trim());
+                }
+            }
+            // closes the scanner
+            scanner.close();
+        }
+        // catches the exception if the file cannot be found
+        // and outputs the correct information to the console
+        catch (FileNotFoundException e) {
+            System.out.println("Invalid file");
+            e.printStackTrace();
+        }
 
-	}
-	
-	/**
+    }
+
+
+    /**
      * readFile method is used for testing the output against output file
      * 
-     * @param path - path of the output file destination
+     * @param path
+     *            - path of the output file destination
      * @return string of encoded files
      */
     static String readFile(String path) throws IOException {

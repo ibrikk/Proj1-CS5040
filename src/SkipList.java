@@ -15,7 +15,8 @@ import java.util.Random;
  * @param <V>
  *            Value
  */
-public class SkipList<K extends Comparable<? super K>, V> implements Iterable<KVPair<K,V>> {
+public class SkipList<K extends Comparable<? super K>, V>
+    implements Iterable<KVPair<K, V>> {
     private SkipNode head; // First element (Sentinel Node)
     private int size; // number of entries in the Skip List
 
@@ -71,7 +72,7 @@ public class SkipList<K extends Comparable<? super K>, V> implements Iterable<KV
      */
     @SuppressWarnings("unchecked")
     public void insert(KVPair<K, V> it) {
-        
+
     }
 
 
@@ -84,7 +85,7 @@ public class SkipList<K extends Comparable<? super K>, V> implements Iterable<KV
      */
     @SuppressWarnings("unchecked")
     public void adjustHead(int newLevel) {
-        
+
     }
 
 
@@ -97,12 +98,12 @@ public class SkipList<K extends Comparable<? super K>, V> implements Iterable<KV
      * @return returns the removed pair if the pair was valid and null if not
      */
 
-    
     @SuppressWarnings("unchecked")
     public KVPair<K, V> remove(K key) {
         return null;
     }
-  
+
+
     /**
      * Removes a KVPair with the specified value.
      * 
@@ -111,15 +112,16 @@ public class SkipList<K extends Comparable<? super K>, V> implements Iterable<KV
      * @return returns true if the removal was successful
      */
     public KVPair<K, V> removeByValue(V val) {
-  
+
         return null;
     }
+
 
     /**
      * Prints out the SkipList in a human readable format to the console.
      */
     public void dump() {
-  
+
     }
 
     /**
@@ -166,33 +168,37 @@ public class SkipList<K extends Comparable<? super K>, V> implements Iterable<KV
         }
 
     }
-    
+
+
     private class SkipListIterator implements Iterator<KVPair<K, V>> {
         private SkipNode current;
-		
-        public SkipListIterator() {
-        	current = head;
-        }
-        @Override
-		public boolean hasNext() {
-			// TODO Auto-generated method stub
-			return current.forward[0] != null;
-		}
 
-		@Override
-		public KVPair<K, V> next() {
-			// TODO Auto-generated method stub
-			KVPair<K, V> elem = current.forward[0].element();
-			current = current.forward[0];
-			return elem;
-		}
-    	
+        public SkipListIterator() {
+            current = head;
+        }
+
+
+        @Override
+        public boolean hasNext() {
+            // TODO Auto-generated method stub
+            return current.forward[0] != null;
+        }
+
+
+        @Override
+        public KVPair<K, V> next() {
+            // TODO Auto-generated method stub
+            KVPair<K, V> elem = current.forward[0].element();
+            current = current.forward[0];
+            return elem;
+        }
+
     }
 
-	@Override
-	public Iterator<KVPair<K,V>> iterator() {
-		// TODO Auto-generated method stub
-		return new SkipListIterator();
-	}
+    @Override
+    public Iterator<KVPair<K, V>> iterator() {
+        // TODO Auto-generated method stub
+        return new SkipListIterator();
+    }
 
 }
