@@ -55,6 +55,15 @@ public class CommandProcessor {
         // their Integer equivalent, trimming the whitespace
         if (command.equals("insert")) {
             // Calls insert
+            if (isEligible(arr[2], arr[3], arr[4], arr[5]) && arr[1] != null
+                && !arr[1].isEmpty()) {
+                Rectangle rectangle = new Rectangle(Integer.parseInt(arr[2]),
+                    Integer.parseInt(arr[3]), Integer.parseInt(arr[4]), Integer
+                        .parseInt(arr[5]));
+                KVPair<String, Rectangle> pair = new KVPair<String, Rectangle>(
+                    arr[1], rectangle);
+                data.insert(pair);
+            }
         }
         // calls the appropriate remove method based on the
         // number of white space delimited strings in the line
@@ -63,12 +72,19 @@ public class CommandProcessor {
             int numParam = arr.length - 1;
             if (numParam == 1) {
                 // Calls remove by name
+                if (arr[0] != null && !arr[0].isEmpty()) {
+                    data.remove(arr[0]);
+                }
 
             }
             else if (numParam == 4) {
                 // Calls remove by coordinate, converting string
                 // integers into their Integer equivalent minus whitespace
-
+                if (isEligible(arr[1], arr[2], arr[3], arr[4])) {
+                    data.remove(Integer.parseInt(arr[1]), Integer.parseInt(
+                        arr[2]), Integer.parseInt(arr[3]), Integer.parseInt(
+                            arr[4]));
+                }
             }
 
         }
@@ -99,6 +115,19 @@ public class CommandProcessor {
             // a message will be written to the console
             System.out.println("Unrecognized command.");
         }
+    }
+
+
+    private boolean isEligible(
+        String x,
+        String y,
+        String width,
+        String length) {
+        if (Integer.parseInt(x) < 0 || Integer.parseInt(y) < 0 || Integer
+            .parseInt(width) <= 0 || Integer.parseInt(length) <= 0) {
+            return false;
+        }
+        return true;
     }
 
 }
