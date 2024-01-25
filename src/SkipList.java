@@ -72,6 +72,15 @@ public class SkipList<K extends Comparable<? super K>, V>
      */
     @SuppressWarnings("unchecked")
     public void insert(KVPair<K, V> it) {
+        int newLevel = randomLevel();
+        if (newLevel > head.level) {
+            adjustHead(newLevel);
+        }
+
+        SkipNode[] update = new SkipNode[newLevel + 1]; // Array to track the
+                                                        // path where we need to
+                                                        // insert
+        
 
     }
 
@@ -85,7 +94,12 @@ public class SkipList<K extends Comparable<? super K>, V>
      */
     @SuppressWarnings("unchecked")
     public void adjustHead(int newLevel) {
-
+        SkipNode newHead = new SkipNode(null, newLevel);
+        for (int i = 0; i <= head.level; i++) {
+            newHead.forward[i] = head.forward[i]; // Copy existing forward
+                                                  // references
+        }
+        head = newHead; // Update the head reference
     }
 
 

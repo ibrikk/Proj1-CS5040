@@ -13,8 +13,8 @@ public class SkipListProjectTest extends TestCase {
 
 
     public void testMain() {
-// String[] args = { "duplicate_test.txt" };
-        String[] args = { "P1test1.txt" };
+        String[] args = { "duplicate_test.txt" };
+// String[] args = { "P1test1.txt" };
         systemOut().clearHistory();
         SkipListProject.main(args);
         String output = systemOut().getHistory();
