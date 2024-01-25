@@ -55,7 +55,7 @@ public class Database {
         // Delegates the decision mostly to SkipList, only
         // writing the correct message to the console from
         // that
-
+        list.insert(pair);
     }
 
 
