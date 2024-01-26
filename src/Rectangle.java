@@ -123,10 +123,8 @@ public class Rectangle {
      * @return true if the rectangle has invalid parameters, false if not
      */
     public boolean isInvalid() {
-        if (this.xCoordinate < 0 || this.yCoordinate < 0 || this.width <= 0
-            || this.height <= 0) {
-            return true;
-        }
-        return false;
+        return this.xCoordinate < 0 || this.yCoordinate < 0 || this.width <= 0
+            || this.height <= 0;
+           
     }
 }
