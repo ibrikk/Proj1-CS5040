@@ -3,9 +3,9 @@
  * class is to hold generic KVPair object which will be stored in the SkipList.
  * There is also a toString method for easily translating the objects contained
  * in the KVPair into a human readable string.
- * 
- * @author CS Staff
- * 
+ *
+ * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
+ *
  * @version 2021-08-23
  * @param <K>
  *            Key to be used
@@ -26,7 +26,7 @@ public class KVPair<K extends Comparable<? super K>, V> {
     /**
      * The constructor assigns value to the key and value fields from user
      * specified objects.
-     * 
+     *
      * @param strKey
      *            the key for the KVPair
      * @param val
