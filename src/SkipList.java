@@ -7,8 +7,7 @@ import java.util.Random;
  * This class implements SkipList data structure and contains an inner SkipNode
  * class which the SkipList will make an array of to store data.
  *
- * @author CS Staff
- * @author franciscawood@vt.edu {Francisca Wood}
+ * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
  *
  * @version 2021-08-23
  * @param <K>

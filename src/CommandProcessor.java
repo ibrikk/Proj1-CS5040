@@ -2,8 +2,7 @@
  * The purpose of this class is to parse a single line from the command text
  * file according to the format specified in the project specs.
  *
- * @author CS Staff
- * @author franciscawood@vt.edu {Francisca Wood}
+ * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
  *
  * @version 2021-08-23
  */
@@ -124,11 +123,9 @@ public class CommandProcessor {
         String y,
         String width,
         String length) {
-        if (Integer.parseInt(x) < 0 || Integer.parseInt(y) < 0 || Integer
-            .parseInt(width) <= 0 || Integer.parseInt(length) <= 0) {
-            return false;
-        }
-        return true;
+        return !(Integer.parseInt(x) < 0 || Integer.parseInt(y) < 0 || Integer
+            .parseInt(width) <= 0 || Integer.parseInt(length) <= 0);
+         
     }
 
 }
