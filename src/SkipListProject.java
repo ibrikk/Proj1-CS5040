@@ -30,8 +30,7 @@ import java.util.Scanner;
  * will take a command line file argument which include the commands to be read.
  * It has a CommandProcessor object to process each command from the file.
  *
- * @author CS Staff
- * @author franciscawood@vt.edu {Francisca Wood}
+ * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
  *
  * @version 2021-08-23
  */

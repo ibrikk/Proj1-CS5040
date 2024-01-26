@@ -2,8 +2,7 @@
  * The purpose of this class is to parse a single line from the command text
  * file according to the format specified in the project specs.
  *
- * @author CS Staff
- * @author franciscawood@vt.edu {Francisca Wood}
+ * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
  *
  * @version 2021-08-23
  */

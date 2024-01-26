@@ -13,8 +13,7 @@ import java.util.Iterator;
  * we will have two data structures. The Database class will then determine
  * which command should be directed to which data structure.
  *
- * @author CS Staff
- * @author franciscawood@vt.edu {Francisca Wood}
+ * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
  *
  * @version 2021-08-23
  */
