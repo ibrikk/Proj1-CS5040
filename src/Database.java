@@ -146,7 +146,6 @@ public class Database {
      * be delegated to the SkipList.
      */
     public void dump() {
-
+        list.dump();
     }
-
 }

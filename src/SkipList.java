@@ -122,7 +122,11 @@ public class SkipList<K extends Comparable<? super K>, V>
      * Prints out the SkipList in a human readable format to the console.
      */
     public void dump() {
-
+        SkipNode curr = head;
+        for (int i = 0; i <= size; i++) {
+            System.out.println("Node has depth"++", Value"++)
+        }
+    }
     }
 
     /**
@@ -166,6 +170,10 @@ public class SkipList<K extends Comparable<? super K>, V>
          */
         public KVPair<K, V> element() {
             return pair;
+        }
+
+        public String toString() {
+            return "("+pair.getKey()+", "+pair.getValue()+")";
         }
 
     }
