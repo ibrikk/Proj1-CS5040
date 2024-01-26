@@ -8,13 +8,14 @@ import java.util.Iterator;
  * will be overloaded methods for if we are removing by name or by coordinates.
  * Many of these methods will simply call the appropriate version of the
  * SkipList method after some preparation.
- * 
+ *
  * Also note that the Database class will have a clearer role in Project2, where
  * we will have two data structures. The Database class will then determine
  * which command should be directed to which data structure.
- * 
+ *
  * @author CS Staff
- * 
+ * @author franciscawood@vt.edu {Francisca Wood}
+ *
  * @version 2021-08-23
  */
 public class Database {
@@ -47,7 +48,7 @@ public class Database {
      * dimensions, that is that the coordinates are non-negative and that the
      * rectangle object has some area (not 0, 0, 0, 0). This insert will add the
      * KVPair specified into the sorted SkipList appropriately
-     * 
+     *
      * @param pair
      *            the KVPair to be inserted
      */
@@ -62,7 +63,7 @@ public class Database {
     /**
      * Removes a rectangle with the name "name" if available. If not an error
      * message is printed to the console.
-     * 
+     *
      * @param name
      *            the name of the rectangle to be removed
      */
@@ -75,7 +76,7 @@ public class Database {
      * Removes a rectangle with the specified coordinates if available. If not
      * an
      * error message is printed to the console.
-     * 
+     *
      * @param x
      *            x-coordinate of the rectangle to be removed
      * @param y
@@ -97,7 +98,7 @@ public class Database {
      * Rectangles that only touch a side or corner of the region specified will
      * not
      * be said to be in the region.
-     * 
+     *
      * @param x
      *            x-Coordinate of the region
      * @param y
@@ -128,7 +129,7 @@ public class Database {
      * Prints out all the rectangles with the specified name in the SkipList.
      * This
      * method will delegate the searching to the SkipList class completely.
-     * 
+     *
      * @param name
      *            name of the Rectangle to be searched for
      */

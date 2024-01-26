@@ -1,6 +1,17 @@
 import java.io.IOException;
 
 import student.TestCase;
+/**
+ * This class is used to test stuff as we are developing
+ *
+ * @author franciscawood@vt.edu {Francisca Wood}
+ *
+ * @version 2021-08-23
+ * @param <K>
+ *            Key
+ * @param <V>
+ *            Value
+ */
 
 public class SkipListProjectTest extends TestCase {
 

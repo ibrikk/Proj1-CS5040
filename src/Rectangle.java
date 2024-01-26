@@ -1,9 +1,10 @@
 /**
  * This class holds the coordinates and dimensions of a rectangle and methods to
  * check if it intersects or has the same coordinates as an other rectangle.
- * 
+ *
  * @author CS Staff
- * 
+ * @author franciscawood@vt.edu {Francisca Wood}
+ *
  * @version 2021-08-23
  */
 public class Rectangle {
@@ -19,7 +20,7 @@ public class Rectangle {
     /**
      * Creates an object with the values to the parameters given in the
      * xCoordinate, yCoordinate, width, height
-     * 
+     *
      * @param x
      *            x-coordinate of the rectangle
      * @param y
@@ -79,7 +80,7 @@ public class Rectangle {
 
     /**
      * Checks if the invoking rectangle intersects with rec.
-     * 
+     *
      * @param r2
      *            Rectangle parameter
      * @return true if the rectangle intersects with rec, false if not
@@ -92,7 +93,7 @@ public class Rectangle {
 
     /**
      * Checks, if the invoking rectangle has the same coordinates as rec.
-     * 
+     *
      * @param rec
      *            the rectangle parameter
      * @return true if the rectangle has the same coordinates as rec, false if
@@ -106,7 +107,7 @@ public class Rectangle {
     /**
      * Outputs a human readable string with information about the rectangle
      * which includes the x and y coordinate and its height and width
-     * 
+     *
      * @return a human readable string containing information about the
      *         rectangle
      */
@@ -117,7 +118,7 @@ public class Rectangle {
 
     /**
      * Checks if the rectangle has invalid parameters
-     * 
+     *
      * @return true if the rectangle has invalid parameters, false if not
      */
     public boolean isInvalid() {

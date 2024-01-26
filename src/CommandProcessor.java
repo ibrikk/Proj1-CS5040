@@ -1,9 +1,10 @@
 /**
  * The purpose of this class is to parse a single line from the command text
  * file according to the format specified in the project specs.
- * 
+ *
  * @author CS Staff
- * 
+ * @author franciscawood@vt.edu {Francisca Wood}
+ *
  * @version 2021-08-23
  */
 public class CommandProcessor {
@@ -18,7 +19,7 @@ public class CommandProcessor {
      * exist, so the only constructor takes a database class object to feed
      * commands
      * to.
-     * 
+     *
      * @param dataIn
      *            the database object to manipulate
      */
@@ -40,7 +41,7 @@ public class CommandProcessor {
      * that
      * the methods called will themselves write to the console, this method does
      * not, only calling methods that do.
-     * 
+     *
      * @param line
      *            a single line from the text file
      */
