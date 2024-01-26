@@ -123,11 +123,9 @@ public class CommandProcessor {
         String y,
         String width,
         String length) {
-        if (Integer.parseInt(x) < 0 || Integer.parseInt(y) < 0 || Integer
-            .parseInt(width) <= 0 || Integer.parseInt(length) <= 0) {
-            return false;
-        }
-        return true;
+        return !(Integer.parseInt(x) < 0 || Integer.parseInt(y) < 0 || Integer
+            .parseInt(width) <= 0 || Integer.parseInt(length) <= 0);
+         
     }
 
 }
