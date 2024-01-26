@@ -111,7 +111,9 @@ public class Rectangle {
      *         rectangle
      */
     public String toString() {
-        return null;
+        return String.valueOf(this.xCoordinate) + ", " + String.valueOf(
+            this.yCoordinate) + ", " + String.valueOf(this.width) + ", "
+            + String.valueOf(this.height);
     }
 
 
@@ -121,6 +123,10 @@ public class Rectangle {
      * @return true if the rectangle has invalid parameters, false if not
      */
     public boolean isInvalid() {
+        if (this.xCoordinate < 0 || this.yCoordinate < 0 || this.width <= 0
+            || this.height <= 0) {
+            return true;
+        }
         return false;
     }
 }

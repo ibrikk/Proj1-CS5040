@@ -29,7 +29,7 @@ public class Database {
     // outside
     // the class.
     // You will need to define an extra Iterator for the intersections method.
-    private Iterator<KVPair<String, Rectangle>> itr1;
+    private Iterator<KVPair<String, Rectangle>> itr1; // only to traverse by value
 
     /**
      * The constructor for this class initializes a SkipList object with String
