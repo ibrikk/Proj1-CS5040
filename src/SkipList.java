@@ -6,9 +6,10 @@ import java.util.Random;
 /**
  * This class implements SkipList data structure and contains an inner SkipNode
  * class which the SkipList will make an array of to store data.
- * 
+ *
  * @author CS Staff
- * 
+ * @author franciscawood@vt.edu {Francisca Wood}
+ *
  * @version 2021-08-23
  * @param <K>
  *            Key
@@ -31,7 +32,7 @@ public class SkipList<K extends Comparable<? super K>, V>
 
     /**
      * Returns a random level number which is used as the depth of the SkipNode
-     * 
+     *
      * @return a random level number
      */
     int randomLevel() {
@@ -46,7 +47,7 @@ public class SkipList<K extends Comparable<? super K>, V>
 
     /**
      * Searches for the KVPair using the key which is a Comparable object.
-     * 
+     *
      * @param key
      *            key to be searched for
      */
@@ -66,7 +67,7 @@ public class SkipList<K extends Comparable<? super K>, V>
     /**
      * Inserts the KVPair in the SkipList at its appropriate spot as designated
      * by its lexicoragraphical order.
-     * 
+     *
      * @param it
      *            the KVPair to be inserted
      */
@@ -79,7 +80,7 @@ public class SkipList<K extends Comparable<? super K>, V>
     /**
      * Increases the number of levels in head so that no element has more
      * indices than the head.
-     * 
+     *
      * @param newLevel
      *            the number of levels to be added to head
      */
@@ -92,7 +93,7 @@ public class SkipList<K extends Comparable<? super K>, V>
     /**
      * Removes the KVPair that is passed in as a parameter and returns true if
      * the pair was valid and false if not.
-     * 
+     *
      * @param pair
      *            the KVPair to be removed
      * @return returns the removed pair if the pair was valid and null if not
@@ -106,7 +107,7 @@ public class SkipList<K extends Comparable<? super K>, V>
 
     /**
      * Removes a KVPair with the specified value.
-     * 
+     *
      * @param val
      *            the value of the KVPair to be removed
      * @return returns true if the removal was successful
@@ -126,9 +127,9 @@ public class SkipList<K extends Comparable<? super K>, V>
 
     /**
      * This class implements a SkipNode for the SkipList data structure.
-     * 
+     *
      * @author CS Staff
-     * 
+     *
      * @version 2016-01-30
      */
     private class SkipNode {
@@ -143,7 +144,7 @@ public class SkipList<K extends Comparable<? super K>, V>
         /**
          * Initializes the fields with the required KVPair and the number of
          * levels from the random level method in the SkipList.
-         * 
+         *
          * @param tempPair
          *            the KVPair to be inserted
          * @param level
@@ -160,7 +161,7 @@ public class SkipList<K extends Comparable<? super K>, V>
 
         /**
          * Returns the KVPair stored in the SkipList.
-         * 
+         *
          * @return the KVPair
          */
         public KVPair<K, V> element() {
