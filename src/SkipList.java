@@ -121,7 +121,13 @@ public class SkipList<K extends Comparable<? super K>, V>
      * Prints out the SkipList in a human readable format to the console.
      */
     public void dump() {
-
+        SkipListIterator it = iterator();
+        while (it.hasNext()) {
+            KVPair<K, V> currPair = it.next();
+            System.out.println("Node level "+it.getSkipNodeLevel());
+            System.out.println("key "+currPair.getKey());
+            System.out.println("val "+currPair.getValue());
+        }
     }
 
     /**
@@ -167,6 +173,10 @@ public class SkipList<K extends Comparable<? super K>, V>
             return pair;
         }
 
+        public int getLevel() {
+            return level;
+        }
+
     }
 
 
@@ -193,10 +203,14 @@ public class SkipList<K extends Comparable<? super K>, V>
             return elem;
         }
 
+        public int getSkipNodeLevel() {
+            return current.getLevel();
+        }
+
     }
 
     @Override
-    public Iterator<KVPair<K, V>> iterator() {
+    public SkipListIterator iterator() {
         // TODO Auto-generated method stub
         return new SkipListIterator();
     }
