@@ -79,13 +79,13 @@ public class SkipList<K extends Comparable<? super K>, V>
 
         // Array to track the path where we need to insert
         SkipNode[] update = (SkipNode[])Array.newInstance(
-            SkipList.SkipNode.class, newLevel + 1);
+            SkipList.SkipNode.class, head.level + 1);
 
         SkipNode x = head; // Start at header node
 
         for (int i = head.level; i >= 0; i--) {
-            while (x.forward[i] != null && x.forward[i].element().getKey()
-                .compareTo(it.getKey()) < 0) {
+            while ((x.forward[i] != null) && (x.forward[i].element().getKey()
+                .compareTo(it.getKey()) < 0)) {
                 x = x.forward[i];
             }
             update[i] = x;
