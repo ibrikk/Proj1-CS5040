@@ -111,7 +111,7 @@ public class Rectangle {
      *         rectangle
      */
     public String toString() {
-        return null;
+        return xCoordinate+", "+yCoordinate+", "+width+", "+height;
     }
 
 
