@@ -34,7 +34,7 @@ public class SkipListTest extends TestCase {
 
 
     public void testInsert() {
-        SkipList skl = new SkipList();
+        SkipList<String, Rectangle> skl = new SkipList<>();
         Rectangle rec1 = new Rectangle(0, 0, 100, 100);
         Rectangle rec2 = new Rectangle(99, 99, 924, 924);
         KVPair<String, Rectangle> it1 = new KVPair<>("A", rec1);
