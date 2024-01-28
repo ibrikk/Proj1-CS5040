@@ -57,9 +57,9 @@ public class Database {
         // writing the correct message to the console from
         // that
         if (!(isValidAscii(pair.getKey()))) {
-            System.out.println(
-                "The name must begin with a letter, and may contain letters, digits, and\n"
-                    + "underscore characters.");
+            System.out.println("The name must begin with a letter, "
+                + "and may contain letters, digits,"
+                + " and underscore characters.");
             return;
         }
         if (pair.getValue().isInvalid()) {
