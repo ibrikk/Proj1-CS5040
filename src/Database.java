@@ -56,7 +56,14 @@ public class Database {
         // Delegates the decision mostly to SkipList, only
         // writing the correct message to the console from
         // that
+        if (pair.getValue().isInvalid()) {
+            System.out.println("Rectangle rejected: (" + pair.getKey() + ", "
+                + pair.getValue().toString() + ")");
+            return;
+        }
         list.insert(pair);
+        System.out.println("Rectangle inserted: (" + pair.getKey() + ", "
+            + pair.getValue().toString() + ")");
     }
 
 
