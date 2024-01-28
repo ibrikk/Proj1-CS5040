@@ -54,20 +54,12 @@ public class CommandProcessor {
         // parameters by converting the string integers into
         // their Integer equivalent, trimming the whitespace
         if (command.equals("insert")) {
-
-            if (isValidAscii(arr[1])) {
-                Rectangle rectangle = new Rectangle(Integer.parseInt(arr[2]),
-                    Integer.parseInt(arr[3]), Integer.parseInt(arr[4]), Integer
-                        .parseInt(arr[5]));
-                KVPair<String, Rectangle> pair = new KVPair<String, Rectangle>(
-                    arr[1], rectangle);
-                data.insert(pair);
-            } else {
-                System.out.println(
-                    "The name must begin with a letter, and may contain letters, digits, and\n"
-                    + "underscore characters.");
-            }
-
+            Rectangle rectangle = new Rectangle(Integer.parseInt(arr[2]),
+                Integer.parseInt(arr[3]), Integer.parseInt(arr[4]), Integer
+                    .parseInt(arr[5]));
+            KVPair<String, Rectangle> pair = new KVPair<String, Rectangle>(
+                arr[1], rectangle);
+            data.insert(pair);
         }
         // calls the appropriate remove method based on the
         // number of white space delimited strings in the line
@@ -114,33 +106,6 @@ public class CommandProcessor {
             // a message will be written to the console
             System.out.println("Unrecognized command.");
         }
-    }
-    
- // The name must begin with a letter, and may contain letters, digits, and
- // underscore characters.
-    private boolean isValidAscii(String key) {
-        if (key == null || key.isEmpty()) {
-            return false;
-        }
-
-        // Check first character is a letter
-        char firstChar = key.charAt(0);
-        if (!((firstChar >= 'A' && firstChar <= 'Z') || (firstChar >= 'a' && firstChar <= 'z'))) {
-            return false;
-        }
-
-        // Check remaining characters
-        for (int i = 1; i < key.length(); i++) {
-            char ch = key.charAt(i);
-            if (!((ch >= 'A' && ch <= 'Z') || 
-                  (ch >= 'a' && ch <= 'z') || 
-                  (ch >= '0' && ch <= '9') || 
-                  (ch == '_'))) {
-                return false;
-            }
-        }
-
-        return true;
     }
 
 }
