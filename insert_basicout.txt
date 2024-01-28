@@ -1,0 +1,6 @@
+Rectangle inserted: (A, 1, 1, 10, 10)
+Rectangle inserted: (B, 2, 2, 12, 8)
+Rectangle inserted: (A, 1, 1, 10, 10)
+Rectangle inserted: (C, 2, 2, 12, 8)
+Rectangle inserted: (A, 1, 1, 10, 10)
+Rectangle inserted: (B, 2, 2, 10, 8)
