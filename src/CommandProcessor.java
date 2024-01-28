@@ -2,9 +2,9 @@
  * The purpose of this class is to parse a single line from the command text
  * file according to the format specified in the project specs.
  * 
- * @author CS Staff
- * 
- * @version 2021-08-23
+ * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
+ *
+ * @version 2024-01-27
  */
 public class CommandProcessor {
 

@@ -30,9 +30,9 @@ import java.util.Scanner;
  * will take a command line file argument which include the commands to be read.
  * It has a CommandProcessor object to process each command from the file.
  *
- * @author CS Staff
- * 
- * @version 2021-08-23
+ * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
+ *
+ * @version 2024-01-27
  */
 public class SkipListProject {
 
