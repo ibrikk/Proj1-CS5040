@@ -54,21 +54,18 @@ public class CommandProcessor {
         // parameters by converting the string integers into
         // their Integer equivalent, trimming the whitespace
         if (command.equals("insert")) {
-            // Calls insert
-            if (arr[1] != null && !arr[1].isEmpty()) {
+
+            if (isValidAscii(arr[1])) {
                 Rectangle rectangle = new Rectangle(Integer.parseInt(arr[2]),
                     Integer.parseInt(arr[3]), Integer.parseInt(arr[4]), Integer
                         .parseInt(arr[5]));
-                if (rectangle.isInvalid()) {
-                    System.out.println("Rectangle rejected: (" + arr[1] + ", "
-                        + rectangle.toString() + ")");
-                    return;
-                }
                 KVPair<String, Rectangle> pair = new KVPair<String, Rectangle>(
                     arr[1], rectangle);
                 data.insert(pair);
-                System.out.println("Rectangle inserted: (" + arr[1] + ", "
-                    + rectangle.toString() + ")");
+            } else {
+                System.out.println(
+                    "The name must begin with a letter, and may contain letters, digits, and\n"
+                    + "underscore characters.");
             }
 
         }
@@ -118,4 +115,32 @@ public class CommandProcessor {
             System.out.println("Unrecognized command.");
         }
     }
+    
+ // The name must begin with a letter, and may contain letters, digits, and
+ // underscore characters.
+    private boolean isValidAscii(String key) {
+        if (key == null || key.isEmpty()) {
+            return false;
+        }
+
+        // Check first character is a letter
+        char firstChar = key.charAt(0);
+        if (!((firstChar >= 'A' && firstChar <= 'Z') || (firstChar >= 'a' && firstChar <= 'z'))) {
+            return false;
+        }
+
+        // Check remaining characters
+        for (int i = 1; i < key.length(); i++) {
+            char ch = key.charAt(i);
+            if (!((ch >= 'A' && ch <= 'Z') || 
+                  (ch >= 'a' && ch <= 'z') || 
+                  (ch >= '0' && ch <= '9') || 
+                  (ch == '_'))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }
