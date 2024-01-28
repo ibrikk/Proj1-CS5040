@@ -54,6 +54,7 @@ public class SkipListTest extends TestCase {
         assertEquals(skl.size(), 3);
     }
 
+
     @Test
     public void testAdjustHead() {
         SkipList<String, Rectangle> skl = new SkipList<>();
