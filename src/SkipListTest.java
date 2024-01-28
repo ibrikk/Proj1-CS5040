@@ -1,3 +1,5 @@
+import org.junit.Before;
+import org.junit.Test;
 import student.TestCase;
 
 // On my honor:
@@ -28,11 +30,13 @@ import student.TestCase;
  * @version 2024-01-27
  */
 public class SkipListTest extends TestCase {
+    @Before
     public void setUp() {
         // Nothing Here
     }
 
 
+    @Test
     public void testInsert() {
         SkipList<String, Rectangle> skl = new SkipList<>();
         Rectangle rec1 = new Rectangle(0, 0, 100, 100);
@@ -41,11 +45,23 @@ public class SkipListTest extends TestCase {
         KVPair<String, Rectangle> it2 = new KVPair<>("B", rec2);
         skl.insert(it1);
         assertEquals(skl.size(), 1);
+        assertNull(skl.getHeadElement());
 
         skl.insert(it2);
         assertEquals(skl.size(), 2);
 
         skl.insert(it1);
         assertEquals(skl.size(), 3);
+    }
+
+    @Test
+    public void testAdjustHead() {
+        SkipList<String, Rectangle> skl = new SkipList<>();
+        int newLevel = 3;
+        skl.adjustHead(newLevel);
+        assertEquals(skl.size(), 0);
+        assertEquals(skl.getHeadLevel(), newLevel);
+        assertNull(skl.getHeadElement());
+
     }
 }

@@ -61,6 +61,20 @@ public class SkipList<K extends Comparable<? super K>, V>
     public int size() {
         return size;
     }
+    
+    /**
+     * @return the headElement of the SkipList
+     */
+    public KVPair<K, V> getHeadElement() {
+        return head.element();
+    }
+    
+    /**
+     * @return the headLevel of the SkipList
+     */
+    public int getHeadLevel() {
+        return head.level;
+    }
 
 
     /**
