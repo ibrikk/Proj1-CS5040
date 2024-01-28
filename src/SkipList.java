@@ -6,10 +6,10 @@ import java.util.Random;
 /**
  * This class implements SkipList data structure and contains an inner SkipNode
  * class which the SkipList will make an array of to store data.
- *
+ * 
  * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
  *
- * @version 2021-08-23
+ * @version 2024-01-27
  * @param <K>
  *            Key
  * @param <V>
@@ -72,6 +72,32 @@ public class SkipList<K extends Comparable<? super K>, V>
      */
     @SuppressWarnings("unchecked")
     public void insert(KVPair<K, V> it) {
+        int newLevel = randomLevel();
+        if (newLevel > head.level) {
+            adjustHead(newLevel);
+        }
+
+        // Array to track the path where we need to insert
+        SkipNode[] update = (SkipNode[])Array.newInstance(
+            SkipList.SkipNode.class, head.level + 1);
+
+        SkipNode x = head; // Start at header node
+
+        for (int i = head.level; i >= 0; i--) {
+            while ((x.forward[i] != null) && (x.forward[i].element().getKey()
+                .compareTo(it.getKey()) < 0)) {
+                x = x.forward[i];
+            }
+            update[i] = x;
+        }
+
+        SkipNode newNode = new SkipNode(it, newLevel);
+        for (int i = 0; i <= newLevel; i++) {
+            newNode.forward[i] = update[i].forward[i];
+            update[i].forward[i] = newNode;
+        }
+
+        size++;
 
     }
 
@@ -85,7 +111,12 @@ public class SkipList<K extends Comparable<? super K>, V>
      */
     @SuppressWarnings("unchecked")
     public void adjustHead(int newLevel) {
-
+        SkipNode newHead = new SkipNode(null, newLevel);
+        for (int i = 0; i <= head.level; i++) {
+            newHead.forward[i] = head.forward[i]; // Copy existing forward
+                                                  // references
+        }
+        head = newHead; // Update the head reference
     }
 
 

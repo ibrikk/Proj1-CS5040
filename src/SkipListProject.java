@@ -32,7 +32,7 @@ import java.util.Scanner;
  *
  * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
  *
- * @version 2021-08-23
+ * @version 2024-01-27
  */
 public class SkipListProject {
 

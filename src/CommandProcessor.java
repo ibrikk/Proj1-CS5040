@@ -1,10 +1,10 @@
 /**
  * The purpose of this class is to parse a single line from the command text
  * file according to the format specified in the project specs.
- *
+ * 
  * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
  *
- * @version 2021-08-23
+ * @version 2024-01-27
  */
 public class CommandProcessor {
 
@@ -55,15 +55,22 @@ public class CommandProcessor {
         // their Integer equivalent, trimming the whitespace
         if (command.equals("insert")) {
             // Calls insert
-            if (isEligible(arr[2], arr[3], arr[4], arr[5]) && arr[1] != null
-                && !arr[1].isEmpty()) {
+            if (arr[1] != null && !arr[1].isEmpty()) {
                 Rectangle rectangle = new Rectangle(Integer.parseInt(arr[2]),
                     Integer.parseInt(arr[3]), Integer.parseInt(arr[4]), Integer
                         .parseInt(arr[5]));
+                if (rectangle.isInvalid()) {
+                    System.out.println("Rectangle rejected: (" + arr[1] + ", "
+                        + rectangle.toString() + ")");
+                    return;
+                }
                 KVPair<String, Rectangle> pair = new KVPair<String, Rectangle>(
                     arr[1], rectangle);
                 data.insert(pair);
+                System.out.println("Rectangle inserted: (" + arr[1] + ", "
+                    + rectangle.toString() + ")");
             }
+
         }
         // calls the appropriate remove method based on the
         // number of white space delimited strings in the line
@@ -80,11 +87,6 @@ public class CommandProcessor {
             else if (numParam == 4) {
                 // Calls remove by coordinate, converting string
                 // integers into their Integer equivalent minus whitespace
-                if (isEligible(arr[1], arr[2], arr[3], arr[4])) {
-                    data.remove(Integer.parseInt(arr[1]), Integer.parseInt(
-                        arr[2]), Integer.parseInt(arr[3]), Integer.parseInt(
-                            arr[4]));
-                }
             }
 
         }
@@ -116,16 +118,4 @@ public class CommandProcessor {
             System.out.println("Unrecognized command.");
         }
     }
-
-
-    private boolean isEligible(
-        String x,
-        String y,
-        String width,
-        String length) {
-        return !(Integer.parseInt(x) < 0 || Integer.parseInt(y) < 0 || Integer
-            .parseInt(width) <= 0 || Integer.parseInt(length) <= 0);
-         
-    }
-
 }

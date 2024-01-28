@@ -12,10 +12,10 @@ import java.util.Iterator;
  * Also note that the Database class will have a clearer role in Project2, where
  * we will have two data structures. The Database class will then determine
  * which command should be directed to which data structure.
- *
+ * 
  * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
  *
- * @version 2021-08-23
+ * @version 2024-01-27
  */
 public class Database {
 
@@ -29,7 +29,8 @@ public class Database {
     // outside
     // the class.
     // You will need to define an extra Iterator for the intersections method.
-    private Iterator<KVPair<String, Rectangle>> itr1;
+    private Iterator<KVPair<String, Rectangle>> itr1; // only to traverse by
+                                                      // value
 
     /**
      * The constructor for this class initializes a SkipList object with String
@@ -55,7 +56,7 @@ public class Database {
         // Delegates the decision mostly to SkipList, only
         // writing the correct message to the console from
         // that
-
+        list.insert(pair);
     }
 
 
