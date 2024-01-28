@@ -84,7 +84,7 @@ public class SkipListProject {
 
     /**
      * readFile method is used for testing the output against output file
-     * 
+     *
      * @param path
      *            - path of the output file destination
      * @return string of encoded files

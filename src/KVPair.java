@@ -26,7 +26,7 @@ public class KVPair<K extends Comparable<? super K>, V> {
     /**
      * The constructor assigns value to the key and value fields from user
      * specified objects.
-     * 
+     *
      * @param strKey
      *            the key for the KVPair
      * @param val

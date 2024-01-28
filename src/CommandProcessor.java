@@ -18,7 +18,7 @@ public class CommandProcessor {
      * exist, so the only constructor takes a database class object to feed
      * commands
      * to.
-     * 
+     *
      * @param dataIn
      *            the database object to manipulate
      */
@@ -40,7 +40,7 @@ public class CommandProcessor {
      * that
      * the methods called will themselves write to the console, this method does
      * not, only calling methods that do.
-     * 
+     *
      * @param line
      *            a single line from the text file
      */
@@ -118,5 +118,4 @@ public class CommandProcessor {
             System.out.println("Unrecognized command.");
         }
     }
-
 }
