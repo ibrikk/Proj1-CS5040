@@ -230,16 +230,6 @@ public class SkipList<K extends Comparable<? super K>, V>
             return pair;
         }
 
-
-        /**
-         * Returns the level of the SkipList.
-         *
-         * @return the level
-         */
-        public int getLevel() {
-            return level;
-        }
-
     }
 
 
@@ -268,7 +258,7 @@ public class SkipList<K extends Comparable<? super K>, V>
 
 
         public int getDepth() {
-           return current.forward.length;
+            return current.forward.length;
         }
 
     }
