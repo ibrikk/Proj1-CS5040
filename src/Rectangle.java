@@ -1,10 +1,10 @@
 /**
  * This class holds the coordinates and dimensions of a rectangle and methods to
  * check if it intersects or has the same coordinates as an other rectangle.
- *
+ * 
  * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
  *
- * @version 2021-08-23
+ * @version 2024-01-27
  */
 public class Rectangle {
     // the x coordinate of the rectangle
@@ -111,7 +111,9 @@ public class Rectangle {
      *         rectangle
      */
     public String toString() {
-        return xCoordinate+", "+yCoordinate+", "+width+", "+height;
+        return String.valueOf(this.xCoordinate) + ", " + String.valueOf(
+            this.yCoordinate) + ", " + String.valueOf(this.width) + ", "
+            + String.valueOf(this.height);
     }
 
 
@@ -121,6 +123,8 @@ public class Rectangle {
      * @return true if the rectangle has invalid parameters, false if not
      */
     public boolean isInvalid() {
-        return false;
+        return this.xCoordinate < 0 || this.yCoordinate < 0 || this.width <= 0
+            || this.height <= 0;
+
     }
 }

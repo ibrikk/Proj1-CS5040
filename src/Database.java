@@ -12,10 +12,10 @@ import java.util.Iterator;
  * Also note that the Database class will have a clearer role in Project2, where
  * we will have two data structures. The Database class will then determine
  * which command should be directed to which data structure.
- *
+ * 
  * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
  *
- * @version 2021-08-23
+ * @version 2024-01-27
  */
 public class Database {
 
@@ -29,7 +29,8 @@ public class Database {
     // outside
     // the class.
     // You will need to define an extra Iterator for the intersections method.
-    private Iterator<KVPair<String, Rectangle>> itr1;
+    private Iterator<KVPair<String, Rectangle>> itr1; // only to traverse by
+                                                      // value
 
     /**
      * The constructor for this class initializes a SkipList object with String
@@ -55,7 +56,47 @@ public class Database {
         // Delegates the decision mostly to SkipList, only
         // writing the correct message to the console from
         // that
+        if (!(isValidAscii(pair.getKey()))) {
+            System.out.println("The name must begin with a letter, "
+                + "and may contain letters, digits,"
+                + " and underscore characters.");
+            return;
+        }
+        if (pair.getValue().isInvalid()) {
+            System.out.println("Rectangle rejected: (" + pair.getKey() + ", "
+                + pair.getValue().toString() + ")");
+            return;
+        }
+        list.insert(pair);
+        System.out.println("Rectangle inserted: (" + pair.getKey() + ", " + pair
+            .getValue().toString() + ")");
+    }
 
+
+    // The name must begin with a letter, and may contain letters, digits, and
+    // underscore characters.
+    private boolean isValidAscii(String key) {
+        if (key == null || key.isEmpty()) {
+            return false;
+        }
+
+        // Check first character is a letter
+        char firstChar = key.charAt(0);
+        if (!((firstChar >= 'A' && firstChar <= 'Z') || (firstChar >= 'a'
+            && firstChar <= 'z'))) {
+            return false;
+        }
+
+        // Check remaining characters
+        for (int i = 1; i < key.length(); i++) {
+            char ch = key.charAt(i);
+            if (!((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z')
+                || (ch >= '0' && ch <= '9') || (ch == '_'))) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 
