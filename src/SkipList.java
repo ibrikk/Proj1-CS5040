@@ -168,7 +168,28 @@ public class SkipList<K extends Comparable<? super K>, V>
      * Prints out the SkipList in a human readable format to the console.
      */
     public void dump() {
+        System.out.println("SkipList dump:");
+        // Initialize iterator
+        Iterator<KVPair<K, V>> itr = new SkipListIterator();
 
+        // Check if the list is empty
+        if (!itr.hasNext()) {
+            int depth = head.level + 1;
+            System.out.println("Node with depth " + depth + ", value null");
+        }
+        else {
+            // Iterate through the SkipList using the iterator
+            while (itr.hasNext()) {
+                KVPair<K, V> pair = itr.next();
+                int depth = ((SkipList<K, V>.SkipListIterator)itr).getDepth();
+
+                String value = "(" + pair.getKey() + ", " + pair.getValue()
+                    .toString() + ")";
+                System.out.println("Node with depth " + depth + ", value "
+                    + value);
+            }
+        }
+        System.out.println("SkipList size is: " + size());
     }
 
     /**
@@ -214,6 +235,11 @@ public class SkipList<K extends Comparable<? super K>, V>
             return pair;
         }
 
+
+        public int getLevel() {
+            return level;
+        }
+
     }
 
 
@@ -238,6 +264,17 @@ public class SkipList<K extends Comparable<? super K>, V>
             KVPair<K, V> elem = current.forward[0].element();
             current = current.forward[0];
             return elem;
+        }
+
+
+        public int getDepth() {
+            int depth = 0;
+            for (SkipNode node : current.forward) {
+                if (node != null) {
+                    depth++;
+                }
+            }
+            return depth;
         }
 
     }
