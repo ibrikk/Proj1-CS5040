@@ -85,24 +85,16 @@ public class Rectangle {
      * @return true if the rectangle intersects with rec, false if not
      */
     public boolean intersect(Rectangle r2) {
+        // Check for null
         if (r2 == null) {
             return false;
         }
 
-        // Check if one rectangle is to the left of the other
-        if (xCoordinate + width - 1 < r2.xCoordinate || r2.xCoordinate
-            + r2.width - 1 < xCoordinate) {
-            return false;
-        }
-
-        // Check if one rectangle is above the other
-        if (yCoordinate + height - 1 < r2.yCoordinate || r2.yCoordinate
-            + r2.height - 1 < yCoordinate) {
-            return false;
-        }
-
-        return true;
-
+        // Return true if the rectangles intersect, false otherwise
+        return !(xCoordinate + width - 1 < r2.xCoordinate || r2.xCoordinate
+            + r2.width - 1 < xCoordinate || yCoordinate + height
+                - 1 < r2.yCoordinate || r2.yCoordinate + r2.height
+                    - 1 < yCoordinate);
     }
 
 

@@ -4,7 +4,7 @@ import student.TestCase;
 
 public class CommandProcessorTest extends TestCase {
 
-    CommandProcessor cmdp;
+    private CommandProcessor cmdp;
 
     @Before
     public void setUp() {

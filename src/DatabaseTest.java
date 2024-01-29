@@ -5,8 +5,8 @@ import student.TestCase;
 
 public class DatabaseTest extends TestCase {
 
-    Database db;
-    String errorMessage1 =
+    private Database db;
+    private String errorMessage1 =
         "The name must begin with a letter, and may contain letters, digits, and underscore characters.";
 
     @Before
