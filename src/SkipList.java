@@ -245,6 +245,7 @@ public class SkipList<K extends Comparable<? super K>, V>
 
     private class SkipListIterator implements Iterator<KVPair<K, V>> {
         private SkipNode current;
+        private int depth = 0;
 
         public SkipListIterator() {
             current = head;
@@ -268,13 +269,7 @@ public class SkipList<K extends Comparable<? super K>, V>
 
 
         public int getDepth() {
-            int depth = 0;
-            for (SkipNode node : current.forward) {
-                if (node != null) {
-                    depth++;
-                }
-            }
-            return depth;
+           return current.forward.length;
         }
 
     }
