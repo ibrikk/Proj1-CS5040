@@ -85,8 +85,16 @@ public class Rectangle {
      * @return true if the rectangle intersects with rec, false if not
      */
     public boolean intersect(Rectangle r2) {
-        return false;
+        // Check for null
+        if (r2 == null) {
+            return false;
+        }
 
+        // Return true if the rectangles intersect, false otherwise
+        return !(xCoordinate + width - 1 < r2.xCoordinate || r2.xCoordinate
+            + r2.width - 1 < xCoordinate || yCoordinate + height
+                - 1 < r2.yCoordinate || r2.yCoordinate + r2.height
+                    - 1 < yCoordinate);
     }
 
 
@@ -99,7 +107,16 @@ public class Rectangle {
      *         not
      */
     public boolean equals(Object rec) {
-        return false;
+        if (this == rec) {
+            return true;
+        }
+        if (rec == null || getClass() != rec.getClass()) {
+            return false;
+        }
+        Rectangle other = (Rectangle)rec;
+        return xCoordinate == other.xCoordinate
+            && yCoordinate == other.yCoordinate && width == other.width
+            && height == other.height;
     }
 
 
