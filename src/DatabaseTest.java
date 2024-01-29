@@ -133,4 +133,77 @@ public class DatabaseTest extends TestCase {
         String output = systemOut().getHistory();
         assertTrue(output.contains(errorMessage1));
     }
+
+
+    // Test for null string
+    @Test
+    public void testIsValidAsciiWithNull() {
+        assertFalse(db.isValidAscii(null));
+    }
+
+
+    // Test for empty string
+    @Test
+    public void testIsValidAsciiWithEmptyString() {
+        assertFalse(db.isValidAscii(""));
+    }
+
+
+    // Test for string starting with a digit
+    @Test
+    public void testIsValidAsciiWithDigitStart() {
+        assertFalse(db.isValidAscii("1abc"));
+    }
+
+
+    // Test for string starting with an underscore
+    @Test
+    public void testIsValidAsciiWithUnderscoreStart() {
+        assertFalse(db.isValidAscii("_abc"));
+    }
+
+
+    // Test for string with invalid characters
+    @Test
+    public void testIsValidAsciiWithSpecialChars() {
+        assertFalse(db.isValidAscii("abc#123"));
+    }
+
+
+    // Test for string with spaces
+    @Test
+    public void testIsValidAsciiWithSpaces() {
+        assertFalse(db.isValidAscii("abc 123"));
+    }
+
+
+    // Test for valid string
+    @Test
+    public void testIsValidAsciiWithValidString() {
+        assertTrue(db.isValidAscii("abc_123"));
+    }
+
+
+    // Tests for each individual condition in the logical expression
+    @Test
+    public void testIsValidAsciiWithUpperBoundChars() {
+        assertTrue(db.isValidAscii("Z"));
+        assertTrue(db.isValidAscii("A"));
+        assertTrue(db.isValidAscii("z"));
+        assertTrue(db.isValidAscii("a"));
+        assertFalse(db.isValidAscii("0"));
+        assertFalse(db.isValidAscii("9"));
+        assertFalse(db.isValidAscii("_"));
+    }
+
+
+    @Test
+    public void testIsValidAsciiWithLowerBoundChars() {
+        assertFalse(db.isValidAscii("["));
+        assertFalse(db.isValidAscii("@"));
+        assertFalse(db.isValidAscii("`"));
+        assertFalse(db.isValidAscii("{"));
+        assertFalse(db.isValidAscii("/"));
+        assertFalse(db.isValidAscii(":"));
+    }
 }
