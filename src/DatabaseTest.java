@@ -3,11 +3,20 @@ import org.junit.Before;
 import org.junit.Test;
 import student.TestCase;
 
+/**
+ * This class tests database methods
+ * 
+ * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
+ *
+ * @version 2024-01-27
+ */
 public class DatabaseTest extends TestCase {
 
     private Database db;
     private String errorMessage1 =
-        "The name must begin with a letter, and may contain letters, digits, and underscore characters.";
+        "The name must begin with a letter, "
+        + "and may contain letters, digits, "
+        + "and underscore characters.";
 
     @Before
     public void setUp() {

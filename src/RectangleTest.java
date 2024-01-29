@@ -2,14 +2,29 @@ import org.junit.Before;
 import org.junit.Test;
 import student.TestCase;
 
+/**
+ * This class tests rectangle methods
+ * 
+ * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
+ *
+ * @version 2024-01-27
+ */
 public class RectangleTest extends TestCase {
 
+    /**
+     * Sets up the test fixture.
+     * Called before every test case method.
+     */
     @Before
     public void setUp() {
         // Nothing Here
     }
 
 
+    /**
+     * Tests if two intersecting rectangles are correctly identified as
+     * intersecting.
+     */
     @Test
     public void testIntersectingRectangles() {
         Rectangle rect1 = new Rectangle(10, 10, 30, 30);
@@ -19,6 +34,10 @@ public class RectangleTest extends TestCase {
     }
 
 
+    /**
+     * Tests if two non-intersecting rectangles are correctly identified as not
+     * intersecting.
+     */
     @Test
     public void testNonIntersectingRectangles() {
         Rectangle rect1 = new Rectangle(10, 10, 20, 20);
@@ -29,17 +48,24 @@ public class RectangleTest extends TestCase {
     }
 
 
+    /**
+     * Tests if rectangles touching edges are correctly identified as
+     * non-intersecting.
+     */
     @Test
     public void testNotIntersectingEdgeRectangles() {
         Rectangle rect1 = new Rectangle(10, 10, 20, 20);
         Rectangle rect2 = new Rectangle(30, 10, 20, 20); // Touches the edge of
                                                          // rect1
-        assertFalse(rect1.intersect(rect2)); 
-                                            
+        assertFalse(rect1.intersect(rect2));
+
         assertFalse(rect2.intersect(rect1));
     }
 
 
+    /**
+     * Tests if two identical rectangles are correctly identified as equal.
+     */
     @Test
     public void testEquals() {
         Rectangle rect1 = new Rectangle(10, 10, 20, 20);
@@ -49,6 +75,9 @@ public class RectangleTest extends TestCase {
     }
 
 
+    /**
+     * Tests if different rectangles are correctly identified as not equal.
+     */
     @Test
     public void testNotEquals() {
         Rectangle rect1 = new Rectangle(10, 10, 20, 20);
@@ -104,7 +133,7 @@ public class RectangleTest extends TestCase {
         Rectangle rect1 = new Rectangle(10, 10, 20, 20);
         Rectangle rect2 = new Rectangle(30, 30, 1, 1); // Touches the corner of
                                                        // rect1
-        assertFalse(rect1.intersect(rect2)); 
+        assertFalse(rect1.intersect(rect2));
     }
 
 
@@ -121,9 +150,9 @@ public class RectangleTest extends TestCase {
     public void testRectanglesTouchingEdges() {
         Rectangle rect1 = new Rectangle(0, 0, 10, 10);
         Rectangle rect2 = new Rectangle(9, 0, 10, 10); // Touches rect1 at the
-                                                        // edge
+                                                       // edge
         Rectangle rect3 = new Rectangle(0, 9, 10, 10); // Touches rect1 at the
-                                                        // corner
+                                                       // corner
         assertTrue(rect1.intersect(rect2));
         assertTrue(rect1.intersect(rect3));
     }
