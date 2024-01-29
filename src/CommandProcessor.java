@@ -63,22 +63,20 @@ public class CommandProcessor {
         }
         // calls the appropriate remove method based on the
         // number of white space delimited strings in the line
-        else if (command.equals("remove")) {
-            // checks the number of white space delimited strings in the line
-            int numParam = arr.length - 1;
-            if (numParam == 1) {
-                // Calls remove by name
-                if (arr[0] != null && !arr[0].isEmpty()) {
-                    data.remove(arr[0]);
-                }
-
-            }
-            else if (numParam == 4) {
-                // Calls remove by coordinate, converting string
-                // integers into their Integer equivalent minus whitespace
-            }
-
-        }
+// else if (command.equals("remove")) {
+// // checks the number of white space delimited strings in the line
+// int numParam = arr.length - 1;
+// if (numParam == 1) {
+// // Calls remove by name
+// data.remove(arr[1]);
+//
+// }
+// else if (numParam == 4) {
+// // Calls remove by coordinate, converting string
+// // integers into their Integer equivalent minus whitespace
+// }
+//
+// }
         else if (command.equals("regionsearch")) {
             // calls the regionsearch method for a set of coordinates
             // the string integers in the line will be trimmed of whitespace
@@ -98,7 +96,7 @@ public class CommandProcessor {
             // calls the dump method for the database, takes no parameters
             // (see the dump() JavaDoc in the Database class for more
             // information)
-
+            data.dump();
         }
         else {
             // the first white space delimited string in the line is not

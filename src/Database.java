@@ -75,7 +75,7 @@ public class Database {
 
     // The name must begin with a letter, and may contain letters, digits, and
     // underscore characters.
-    private boolean isValidAscii(String key) {
+    public boolean isValidAscii(String key) {
         if (key == null || key.isEmpty()) {
             return false;
         }

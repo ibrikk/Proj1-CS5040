@@ -65,4 +65,47 @@ public class SkipListTest extends TestCase {
         assertNull(skl.getHeadElement());
 
     }
+
+
+    @Test
+    public void testDumpEmptySkipList() {
+        Database db = new Database();
+        systemOut().clearHistory();
+        db.dump();
+        String output = systemOut().getHistory();
+        String expectedOutput =
+            "SkipList dump:\nNode with depth 1, value null\nSkipList size is: 0\n";
+        assertEquals(expectedOutput, output);
+    }
+
+
+    @Test
+    public void testDumpSingleElementSkipList() {
+        Database db = new Database();
+        db.insert(new KVPair<>("key1", new Rectangle(1, 2, 3, 4)));
+        systemOut().clearHistory();
+        db.dump();
+
+        String output = systemOut().getHistory();
+        assertTrue(output.startsWith("SkipList dump:\n"));
+        assertTrue(output.contains("value (key1, 1, 2, 3, 4)"));
+        assertTrue(output.endsWith("SkipList size is: 1\n"));
+    }
+
+
+    @Test
+    public void testDumpMultipleElementsSkipList() {
+        Database db = new Database();
+        db.insert(new KVPair<>("key1", new Rectangle(1, 2, 3, 4)));
+        db.insert(new KVPair<>("key2", new Rectangle(5, 6, 7, 8)));
+        systemOut().clearHistory();
+        db.dump();
+
+        String output = systemOut().getHistory();
+        assertTrue(output.startsWith("SkipList dump:\n"));
+        assertTrue(output.contains("value (key1, 1, 2, 3, 4)"));
+        assertTrue(output.contains("value (key2, 5, 6, 7, 8)"));
+        assertTrue(output.endsWith("SkipList size is: 2\n"));
+    }
+
 }

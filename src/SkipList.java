@@ -107,10 +107,10 @@ public class SkipList<K extends Comparable<? super K>, V>
             update[i] = x;
         }
 
-        SkipNode newNode = new SkipNode(it, newLevel);
+        x = new SkipNode(it, newLevel);
         for (int i = 0; i <= newLevel; i++) {
-            newNode.forward[i] = update[i].forward[i];
-            update[i].forward[i] = newNode;
+            x.forward[i] = update[i].forward[i];
+            update[i].forward[i] = x;
         }
 
         size++;
@@ -168,21 +168,23 @@ public class SkipList<K extends Comparable<? super K>, V>
      * Prints out the SkipList in a human readable format to the console.
      */
     public void dump() {
-<<<<<<< HEAD
-        SkipListIterator it = iterator();
-        while (it.hasNext()) {
-            KVPair<K, V> currPair = it.next();
-            System.out.println("Node level "+it.getSkipNodeLevel());
-            System.out.println("key "+currPair.getKey());
-            System.out.println("val "+currPair.getValue());
+        System.out.println("SkipList dump:");
+        // Initialize iterator
+        Iterator<KVPair<K, V>> itr = new SkipListIterator();
+
+        int headDepth = head.level + 1;
+        System.out.println("Node with depth " + headDepth + ", value null");
+
+        // Iterate through the SkipList using the iterator
+        while (itr.hasNext()) {
+            KVPair<K, V> pair = itr.next();
+            int depth = ((SkipList<K, V>.SkipListIterator)itr).getDepth();
+            String value = "(" + pair.getKey() + ", " + pair.getValue()
+                .toString() + ")";
+            System.out.println("Node with depth " + depth + ", value " + value);
         }
-=======
-        SkipNode curr = head;
-        for (int i = 0; i <= size; i++) {
-            System.out.println("Node has depth"++", Value"++)
-        }
-    }
->>>>>>> origin/dump
+
+        System.out.println("SkipList size is: " + size());
     }
 
     /**
@@ -263,8 +265,14 @@ public class SkipList<K extends Comparable<? super K>, V>
             return elem;
         }
 
+<<<<<<< HEAD
         public int getSkipNodeLevel() {
             return current.getLevel();
+=======
+
+        public int getDepth() {
+            return current.forward.length;
+>>>>>>> main
         }
 
     }
