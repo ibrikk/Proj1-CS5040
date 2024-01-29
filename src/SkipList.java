@@ -172,23 +172,18 @@ public class SkipList<K extends Comparable<? super K>, V>
         // Initialize iterator
         Iterator<KVPair<K, V>> itr = new SkipListIterator();
 
-        // Check if the list is empty
-        if (!itr.hasNext()) {
-            int depth = head.level + 1;
-            System.out.println("Node with depth " + depth + ", value null");
-        }
-        else {
-            // Iterate through the SkipList using the iterator
-            while (itr.hasNext()) {
-                KVPair<K, V> pair = itr.next();
-                int depth = ((SkipList<K, V>.SkipListIterator)itr).getDepth();
+        int headDepth = head.level + 1;
+        System.out.println("Node with depth " + headDepth + ", value null");
 
-                String value = "(" + pair.getKey() + ", " + pair.getValue()
-                    .toString() + ")";
-                System.out.println("Node with depth " + depth + ", value "
-                    + value);
-            }
+        // Iterate through the SkipList using the iterator
+        while (itr.hasNext()) {
+            KVPair<K, V> pair = itr.next();
+            int depth = ((SkipList<K, V>.SkipListIterator)itr).getDepth();
+            String value = "(" + pair.getKey() + ", " + pair.getValue()
+                .toString() + ")";
+            System.out.println("Node with depth " + depth + ", value " + value);
         }
+
         System.out.println("SkipList size is: " + size());
     }
 
@@ -236,6 +231,11 @@ public class SkipList<K extends Comparable<? super K>, V>
         }
 
 
+        /**
+         * Returns the level of the SkipList.
+         *
+         * @return the level
+         */
         public int getLevel() {
             return level;
         }
