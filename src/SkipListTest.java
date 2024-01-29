@@ -92,7 +92,8 @@ public class SkipListTest extends TestCase {
         db.dump();
         String output = systemOut().getHistory();
         String expectedOutput =
-            "SkipList dump:\nNode with depth 1, value null\nSkipList size is: 0\n";
+            "SkipList dump:\nNode with depth 1, "
+            + "value null\nSkipList size is: 0\n";
         assertEquals(expectedOutput, output);
     }
 
