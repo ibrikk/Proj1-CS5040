@@ -107,10 +107,10 @@ public class SkipList<K extends Comparable<? super K>, V>
             update[i] = x;
         }
 
-        SkipNode newNode = new SkipNode(it, newLevel);
+        x = new SkipNode(it, newLevel);
         for (int i = 0; i <= newLevel; i++) {
-            newNode.forward[i] = update[i].forward[i];
-            update[i].forward[i] = newNode;
+            x.forward[i] = update[i].forward[i];
+            update[i].forward[i] = x;
         }
 
         size++;
