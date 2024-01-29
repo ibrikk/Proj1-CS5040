@@ -90,14 +90,14 @@ public class Rectangle {
         }
 
         // Check if one rectangle is to the left of the other
-        if (xCoordinate + width <= r2.xCoordinate || r2.xCoordinate
-            + r2.width <= xCoordinate) {
+        if (xCoordinate + width - 1 < r2.xCoordinate || r2.xCoordinate
+            + r2.width - 1 < xCoordinate) {
             return false;
         }
 
         // Check if one rectangle is above the other
-        if (yCoordinate + height <= r2.yCoordinate || r2.yCoordinate
-            + r2.height <= yCoordinate) {
+        if (yCoordinate + height - 1 < r2.yCoordinate || r2.yCoordinate
+            + r2.height - 1 < yCoordinate) {
             return false;
         }
 
