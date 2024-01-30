@@ -13,23 +13,31 @@ import student.TestCase;
 public class DatabaseTest extends TestCase {
 
     private Database db;
-    private String errorMessage1 =
-        "The name must begin with a letter, "
-        + "and may contain letters, digits, "
-        + "and underscore characters.";
+    private String errorMessage1 = "The name must begin with a letter, "
+        + "and may contain letters, digits, " + "and underscore characters.";
 
+    /**
+     * Sets up the test fixture.
+     * Called before every test case method.
+     */
     @Before
     public void setUp() {
         db = new Database();
     }
 
 
+    /**
+     * Called after every test case method.
+     */
     @After
     public void cleanUp() {
         systemOut().clearHistory();
     }
 
 
+    /**
+     * Tests the insert method with an invalid name that starts with a digit.
+     */
     @Test
     public void testInsert1() {
         KVPair<String, Rectangle> pair = new KVPair<>("5a_", new Rectangle(0, 0,
@@ -41,6 +49,9 @@ public class DatabaseTest extends TestCase {
     }
 
 
+    /**
+     * Tests the insert method with an invalid name that contains a colon.
+     */
     @Test
     public void testInsert2() {
         KVPair<String, Rectangle> pair = new KVPair<>("a_:", new Rectangle(0, 0,
@@ -51,6 +62,10 @@ public class DatabaseTest extends TestCase {
         assertFuzzyEquals(output, errorMessage1);
     }
 
+
+    /**
+     * Tests the insert method with a rectangle that has invalid coordinates.
+     */
 
     @Test
     public void testInsert() {
@@ -63,6 +78,10 @@ public class DatabaseTest extends TestCase {
     }
 
 
+    /**
+     * Tests the insert method with an invalid name that contains only
+     * whitespace.
+     */
     @Test
     public void testInsert4() {
         KVPair<String, Rectangle> pair = new KVPair<>(" ", new Rectangle(0, 0,
@@ -76,6 +95,9 @@ public class DatabaseTest extends TestCase {
     }
 
 
+    /**
+     * Tests the insert method with a valid name containing letters and digits.
+     */
     @Test
     public void testValidNameWithLettersAndDigits() {
         KVPair<String, Rectangle> pair = new KVPair<>("Name123", new Rectangle(
@@ -88,6 +110,9 @@ public class DatabaseTest extends TestCase {
     }
 
 
+    /**
+     * Tests the insert method with a valid name containing an underscore.
+     */
     @Test
     public void testValidNameWithUnderscore() {
         KVPair<String, Rectangle> pair = new KVPair<>("Name_123", new Rectangle(
@@ -100,6 +125,9 @@ public class DatabaseTest extends TestCase {
     }
 
 
+    /**
+     * Tests the insert method with an invalid name that starts with a digit.
+     */
     @Test
     public void testNameStartingWithDigit() {
         KVPair<String, Rectangle> pair = new KVPair<>("1Name", new Rectangle(10,
@@ -111,6 +139,10 @@ public class DatabaseTest extends TestCase {
     }
 
 
+    /**
+     * Tests the insert method with an invalid name containing special
+     * characters.
+     */
     @Test
     public void testNameWithSpecialCharacters() {
         KVPair<String, Rectangle> pair = new KVPair<>("Name#123", new Rectangle(
@@ -122,6 +154,9 @@ public class DatabaseTest extends TestCase {
     }
 
 
+    /**
+     * Tests the insert method with an empty name.
+     */
     @Test
     public void testEmptyName() {
         KVPair<String, Rectangle> pair = new KVPair<>("", new Rectangle(10, 10,
@@ -133,6 +168,9 @@ public class DatabaseTest extends TestCase {
     }
 
 
+    /**
+     * Tests the insert method with a null name.
+     */
     @Test
     public void testNullName() {
         KVPair<String, Rectangle> pair = new KVPair<>(null, new Rectangle(10,
@@ -144,56 +182,73 @@ public class DatabaseTest extends TestCase {
     }
 
 
-    // Test for null string
+    /**
+     * Tests isValidAscii method with a null string.
+     */
     @Test
     public void testIsValidAsciiWithNull() {
         assertFalse(db.isValidAscii(null));
     }
 
 
-    // Test for empty string
+    /**
+     * Tests isValidAscii method with an empty string.
+     */
     @Test
     public void testIsValidAsciiWithEmptyString() {
         assertFalse(db.isValidAscii(""));
     }
 
 
-    // Test for string starting with a digit
+    /**
+     * Tests isValidAscii method with a string starting with a digit.
+     */
     @Test
     public void testIsValidAsciiWithDigitStart() {
         assertFalse(db.isValidAscii("1abc"));
     }
 
 
-    // Test for string starting with an underscore
+    /**
+     * Tests isValidAscii method with a string starting with an underscore.
+     */
     @Test
     public void testIsValidAsciiWithUnderscoreStart() {
         assertFalse(db.isValidAscii("_abc"));
     }
 
 
-    // Test for string with invalid characters
+    /**
+     * Tests isValidAscii method with a string containing special characters.
+     */
     @Test
     public void testIsValidAsciiWithSpecialChars() {
         assertFalse(db.isValidAscii("abc#123"));
     }
 
 
-    // Test for string with spaces
+    /**
+     * Tests isValidAscii method with a string containing spaces.
+     */
     @Test
     public void testIsValidAsciiWithSpaces() {
         assertFalse(db.isValidAscii("abc 123"));
     }
 
 
-    // Test for valid string
+    /**
+     * Tests isValidAscii method with a valid string.
+     */
     @Test
     public void testIsValidAsciiWithValidString() {
         assertTrue(db.isValidAscii("abc_123"));
     }
 
 
-    // Tests for each individual condition in the logical expression
+    /**
+     * Tests isValidAscii method with characters on the upper boundary of valid
+     * ranges.
+     */
     @Test
     public void testIsValidAsciiWithUpperBoundChars() {
         assertTrue(db.isValidAscii("Z"));
@@ -206,6 +261,10 @@ public class DatabaseTest extends TestCase {
     }
 
 
+    /**
+     * Tests isValidAscii method with characters on the lower boundary of valid
+     * ranges.
+     */
     @Test
     public void testIsValidAsciiWithLowerBoundChars() {
         assertFalse(db.isValidAscii("["));
