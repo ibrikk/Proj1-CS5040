@@ -43,16 +43,15 @@ public class SkipList<K extends Comparable<? super K>, V>
         return lev; // returns a random level
     }
 
-
-//    /**
-//     * Searches for the KVPair using the key which is a Comparable object.
-//     *
-//     * @param key
-//     *            key to be searched for
-//     */
-//    public ArrayList<KVPair<K, V>> search(K key) {
-//        return null;
-//    }
+// /**
+// * Searches for the KVPair using the key which is a Comparable object.
+// *
+// * @param key
+// * key to be searched for
+// */
+// public ArrayList<KVPair<K, V>> search(K key) {
+// return null;
+// }
 
 
     /**
@@ -88,7 +87,7 @@ public class SkipList<K extends Comparable<? super K>, V>
      */
     @SuppressWarnings("unchecked")
     public void insert(KVPair<K, V> it) {
-        if (it==null) {
+        if (it == null) {
             return;
         }
 
@@ -139,7 +138,6 @@ public class SkipList<K extends Comparable<? super K>, V>
         head = newHead; // Update the head reference
     }
 
-
     /**
      * Removes the KVPair that is passed in as a parameter and returns true if
      * the pair was valid and false if not.
@@ -148,10 +146,10 @@ public class SkipList<K extends Comparable<? super K>, V>
      *            the KVPair to be removed
      * @return returns the removed pair if the pair was valid and null if not
      */
-//    @SuppressWarnings("unchecked")
-//    public KVPair<K, V> remove(K key) {
-//        return null;
-//    }
+// @SuppressWarnings("unchecked")
+// public KVPair<K, V> remove(K key) {
+// return null;
+// }
 
 
     /**
@@ -233,6 +231,7 @@ public class SkipList<K extends Comparable<? super K>, V>
             return pair;
         }
 
+
         /**
          * Returns the level of the node as an integer.
          *
@@ -242,9 +241,7 @@ public class SkipList<K extends Comparable<? super K>, V>
             return level;
         }
 
-        }
-
-
+    }
 
 
     /**
@@ -289,9 +286,11 @@ public class SkipList<K extends Comparable<? super K>, V>
             return elem;
         }
 
+
         public int getSkipNodeLevel() {
             return current.getLevel();
         }
+
 
         /**
          * Retrieves the depth (level) of the current node being pointed to by

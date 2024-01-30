@@ -64,6 +64,10 @@ public class SkipListTest extends TestCase {
         assertEquals(skl.size(), 3);
     }
 
+
+    /**
+     * Tests a big insert
+     */
     @Test
     public void testBigInsert() {
         SkipList<String, Rectangle> skl = new SkipList<>();
@@ -72,14 +76,14 @@ public class SkipListTest extends TestCase {
         Rectangle recNotValid = new Rectangle(-99, -99, 924, 924);
         KVPair<String, Rectangle> it1 = new KVPair<>("A", rec1);
         KVPair<String, Rectangle> it2 = new KVPair<>("B", rec2);
-        KVPair<String, Rectangle> it3 = new KVPair<>("C",recNotValid);
+        KVPair<String, Rectangle> it3 = new KVPair<>("C", recNotValid);
         skl.insert(it3);
         skl.insert(it3);
         skl.insert(it3);
         skl.insert(it3);
 
-        for (int i=0;i<100;i++) {
-            if (i%2==0) {
+        for (int i = 0; i < 100; i++) {
+            if (i % 2 == 0) {
                 skl.insert(it1);
             }
             else {
@@ -117,8 +121,7 @@ public class SkipListTest extends TestCase {
         systemOut().clearHistory();
         db.dump();
         String output = systemOut().getHistory();
-        String expectedOutput =
-            "SkipList dump:\nNode with depth 1, "
+        String expectedOutput = "SkipList dump:\nNode with depth 1, "
             + "value null\nSkipList size is: 0\n";
         assertEquals(expectedOutput, output);
     }

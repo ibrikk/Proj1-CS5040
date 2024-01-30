@@ -236,6 +236,7 @@ public class Database
 
     /**
      * Returns the total size of the database ie the size of the SkipList
+     * @return size
      */
     public int size()
     {
