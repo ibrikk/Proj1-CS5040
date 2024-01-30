@@ -167,9 +167,10 @@ public class Database
      */
     public void regionsearch(int x, int y, int w, int h)
     {
+        Rectangle regionSearch = new Rectangle(x, y, w, h);
         // if any numbers are negative, then we have an invalid search
         // we can have w and height that fall outside of 1024x1024
-        if (w <= 0 || h <= 0)
+        if (regionSearch.isInvalidRegionSearch())
         {
             System.out.println(
                 "Rectangle rejected: (" + x + ", " + y + ", " + w + ", " + h
@@ -177,7 +178,7 @@ public class Database
             return;
         }
 
-        Rectangle regionSearch = new Rectangle(x, y, w, h);
+
         // Initialize iterator
         Iterator<KVPair<String, Rectangle>> itr = list.iterator();
 

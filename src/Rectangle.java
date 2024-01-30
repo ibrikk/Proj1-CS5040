@@ -1,7 +1,7 @@
 /**
  * This class holds the coordinates and dimensions of a rectangle and methods to
  * check if it intersects or has the same coordinates as an other rectangle.
- * 
+ *
  * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
  *
  * @version 2024-01-27
@@ -154,6 +154,22 @@ public class Rectangle {
         }
 
         // The rectangle is valid and within bounds
+        return false;
+    }
+
+    /**
+     * Checks if the rectangle has invalid parameters
+     *
+     * @return true if the rectangle has invalid parameters, false if not
+     */
+    public boolean isInvalidRegionSearch() {
+        // Check for negative width or height, which are invalid region searches
+        if (this.width <= 0 || this.height <= 0) {
+            return true;
+        }
+
+
+        // The rectangle region search is valid
         return false;
     }
 }
