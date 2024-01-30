@@ -73,8 +73,18 @@ public class Database {
     }
 
 
-    // The name must begin with a letter, and may contain letters, digits, and
-    // underscore characters.
+    /**
+     * Validates if a given string adheres to a specific ASCII format.
+     * The name (key) must begin with a letter, and may contain letters, digits,
+     * and underscore characters. The method checks each character of the string
+     * to ensure it conforms to these rules.
+     *
+     * @param key
+     *            The string to be validated.
+     * @return true if the string is valid according to the specified ASCII
+     *         format,
+     *         false otherwise.
+     */
     public boolean isValidAscii(String key) {
         if (key == null || key.isEmpty()) {
             return false;

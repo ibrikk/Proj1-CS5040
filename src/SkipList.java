@@ -44,15 +44,15 @@ public class SkipList<K extends Comparable<? super K>, V>
     }
 
 
-    /**
-     * Searches for the KVPair using the key which is a Comparable object.
-     *
-     * @param key
-     *            key to be searched for
-     */
-    public ArrayList<KVPair<K, V>> search(K key) {
-        return null;
-    }
+//    /**
+//     * Searches for the KVPair using the key which is a Comparable object.
+//     *
+//     * @param key
+//     *            key to be searched for
+//     */
+//    public ArrayList<KVPair<K, V>> search(K key) {
+//        return null;
+//    }
 
 
     /**
@@ -148,11 +148,10 @@ public class SkipList<K extends Comparable<? super K>, V>
      *            the KVPair to be removed
      * @return returns the removed pair if the pair was valid and null if not
      */
-
-    @SuppressWarnings("unchecked")
-    public KVPair<K, V> remove(K key) {
-        return null;
-    }
+//    @SuppressWarnings("unchecked")
+//    public KVPair<K, V> remove(K key) {
+//        return null;
+//    }
 
 
     /**
@@ -194,9 +193,9 @@ public class SkipList<K extends Comparable<? super K>, V>
     /**
      * This class implements a SkipNode for the SkipList data structure.
      *
-     * @author CS Staff
+     * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
      *
-     * @version 2016-01-30
+     * @version 2024-01-27
      */
     private class SkipNode {
 
@@ -248,24 +247,43 @@ public class SkipList<K extends Comparable<? super K>, V>
 
 
 
+    /**
+     * This class provides an iterator for the SkipList data structure. It
+     * allows
+     * sequential access to the key-value pairs stored in the SkipList.
+     */
     private class SkipListIterator implements Iterator<KVPair<K, V>> {
         private SkipNode current;
 
+        /**
+         * Constructs a SkipListIterator and initializes it to start at the head
+         * of
+         * the SkipList.
+         */
         public SkipListIterator() {
             current = head;
         }
 
 
+        /**
+         * Checks if there is a next element in the SkipList.
+         *
+         * @return true if there is a next element, false otherwise.
+         */
         @Override
         public boolean hasNext() {
-            // TODO Auto-generated method stub
             return current.forward[0] != null;
         }
 
 
+        /**
+         * Returns the next key-value pair in the SkipList and advances the
+         * iterator.
+         *
+         * @return The next KVPair in the SkipList.
+         */
         @Override
         public KVPair<K, V> next() {
-            // TODO Auto-generated method stub
             KVPair<K, V> elem = current.forward[0].element();
             current = current.forward[0];
             return elem;
@@ -275,15 +293,32 @@ public class SkipList<K extends Comparable<? super K>, V>
             return current.getLevel();
         }
 
+        /**
+         * Retrieves the depth (level) of the current node being pointed to by
+         * the
+         * iterator.
+         *
+         * @return The depth of the current node.
+         */
         public int getDepth() {
             return current.forward.length;
         }
 
     }
 
+    /**
+     * Provides an instance of the SkipListIterator for iterating over the
+     * SkipList.
+     *
+     * @return An instance of SkipListIterator.
+     */
     @Override
+<<<<<<< HEAD
     public SkipListIterator iterator() {
         // TODO Auto-generated method stub
+=======
+    public Iterator<KVPair<K, V>> iterator() {
+>>>>>>> main
         return new SkipListIterator();
     }
 

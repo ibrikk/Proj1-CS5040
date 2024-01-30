@@ -30,12 +30,22 @@ import student.TestCase;
  * @version 2024-01-27
  */
 public class SkipListTest extends TestCase {
+    /**
+     * Sets up the test fixture.
+     * Called before every test case method.
+     */
     @Before
     public void setUp() {
-        // Nothing Here
+        // Nothing here
     }
 
 
+    /**
+     * Tests the insert method of the SkipList class.
+     * Verifies that the size of the list is incremented correctly upon
+     * insertion
+     * and that the head element is as expected after insertions.
+     */
     @Test
     public void testInsert() {
         SkipList<String, Rectangle> skl = new SkipList<>();
@@ -81,6 +91,11 @@ public class SkipListTest extends TestCase {
     }
 
 
+    /**
+     * Tests the adjustHead method of the SkipList class.
+     * Verifies that the level of the head node is adjusted properly and
+     * that the size remains unchanged after adjusting the head.
+     */
     @Test
     public void testAdjustHead() {
         SkipList<String, Rectangle> skl = new SkipList<>();
@@ -89,10 +104,13 @@ public class SkipListTest extends TestCase {
         assertEquals(skl.size(), 0);
         assertEquals(skl.getHeadLevel(), newLevel);
         assertNull(skl.getHeadElement());
-
     }
 
 
+    /**
+     * Tests the dump method on an empty SkipList.
+     * Verifies the correct output is generated when the SkipList is empty.
+     */
     @Test
     public void testDumpEmptySkipList() {
         Database db = new Database();
@@ -100,11 +118,17 @@ public class SkipListTest extends TestCase {
         db.dump();
         String output = systemOut().getHistory();
         String expectedOutput =
-            "SkipList dump:\nNode with depth 1, value null\nSkipList size is: 0\n";
+            "SkipList dump:\nNode with depth 1, "
+            + "value null\nSkipList size is: 0\n";
         assertEquals(expectedOutput, output);
     }
 
 
+    /**
+     * Tests the dump method on a SkipList with a single element.
+     * Verifies the correct output is generated for a list containing one
+     * element.
+     */
     @Test
     public void testDumpSingleElementSkipList() {
         Database db = new Database();
@@ -119,6 +143,11 @@ public class SkipListTest extends TestCase {
     }
 
 
+    /**
+     * Tests the dump method on a SkipList with multiple elements.
+     * Verifies the correct output is generated for a list containing several
+     * elements.
+     */
     @Test
     public void testDumpMultipleElementsSkipList() {
         Database db = new Database();
