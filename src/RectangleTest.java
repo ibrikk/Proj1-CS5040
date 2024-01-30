@@ -87,6 +87,10 @@ public class RectangleTest extends TestCase {
     }
 
 
+    /**
+     * Tests equality comparison between a Rectangle object and a non-Rectangle
+     * object.
+     */
     @Test
     public void testEqualsWithNonRectangle() {
         Rectangle rect = new Rectangle(10, 10, 20, 20);
@@ -94,6 +98,9 @@ public class RectangleTest extends TestCase {
     }
 
 
+    /**
+     * Tests equality comparison of a Rectangle object with a null reference.
+     */
     @Test
     public void testEqualsWithNull() {
         Rectangle rect = new Rectangle(10, 10, 20, 20);
@@ -101,72 +108,89 @@ public class RectangleTest extends TestCase {
     }
 
 
+    /**
+     * Tests equality of a Rectangle object with itself.
+     */
     @Test
     public void testEqualityWithItself() {
         Rectangle rect = new Rectangle(10, 10, 20, 20);
-        assertTrue(rect.equals(rect)); // Should always be true, tests
-                                       // self-check
+        assertTrue(rect.equals(rect));
     }
 
 
+    /**
+     * Tests inequality of two Rectangle objects with slightly different
+     * dimensions.
+     */
     @Test
     public void testInequalityWithSlightlyDifferentRectangles() {
         Rectangle rect1 = new Rectangle(10, 10, 20, 20);
-        Rectangle rect2 = new Rectangle(10, 10, 20, 21); // Slightly different
-                                                         // height
-        assertFalse(rect1.equals(rect2)); // Should be false
+        Rectangle rect2 = new Rectangle(10, 10, 20, 21);
+        assertFalse(rect1.equals(rect2));
     }
 
 
+    /**
+     * Tests inequality of two Rectangle objects with a slight mutation.
+     */
     @Test
     public void testInequalityAfterMutation() {
         Rectangle rect1 = new Rectangle(10, 10, 20, 20);
-        Rectangle rect2 = new Rectangle(10, 11, 20, 20); // Y coordinate off by
-                                                         // 1
-        assertFalse(rect1.equals(rect2)); // Should catch mutation where
-                                          // equality is replaced with true
+        Rectangle rect2 = new Rectangle(10, 11, 20, 20);
+        assertFalse(rect1.equals(rect2));
     }
 
 
+    /**
+     * Tests intersection of two rectangles at their boundary.
+     */
     @Test
     public void testIntersectionAtBoundary() {
         Rectangle rect1 = new Rectangle(10, 10, 20, 20);
-        Rectangle rect2 = new Rectangle(30, 30, 1, 1); // Touches the corner of
-                                                       // rect1
+        Rectangle rect2 = new Rectangle(30, 30, 1, 1);
         assertFalse(rect1.intersect(rect2));
     }
 
 
+    /**
+     * Tests lack of intersection for rectangles just outside each other's
+     * boundary.
+     */
     @Test
     public void testNoIntersectionJustOutsideBoundary() {
         Rectangle rect1 = new Rectangle(10, 10, 20, 20);
-        Rectangle rect2 = new Rectangle(31, 31, 10, 10); // Just outside the
-                                                         // corner of rect1
-        assertFalse(rect1.intersect(rect2)); // Should be false
+        Rectangle rect2 = new Rectangle(31, 31, 10, 10);
+        assertFalse(rect1.intersect(rect2));
     }
 
 
+    /**
+     * Tests intersection of rectangles touching each other at the edges.
+     */
     @Test
     public void testRectanglesTouchingEdges() {
         Rectangle rect1 = new Rectangle(0, 0, 10, 10);
-        Rectangle rect2 = new Rectangle(9, 0, 10, 10); // Touches rect1 at the
-                                                       // edge
-        Rectangle rect3 = new Rectangle(0, 9, 10, 10); // Touches rect1 at the
-                                                       // corner
+        Rectangle rect2 = new Rectangle(9, 0, 10, 10);
+        Rectangle rect3 = new Rectangle(0, 9, 10, 10);
         assertTrue(rect1.intersect(rect2));
         assertTrue(rect1.intersect(rect3));
     }
 
 
+    /**
+     * Tests intersection of adjacent rectangles.
+     */
     @Test
     public void testAdjacentRectangles() {
         Rectangle rect1 = new Rectangle(10, 10, 10, 10);
-        Rectangle rect2 = new Rectangle(19, 10, 10, 10); // Starts where rect1
-                                                         // ends
+        Rectangle rect2 = new Rectangle(19, 10, 10, 10);
         assertTrue(rect1.intersect(rect2));
     }
 
 
+    /**
+     * Tests inequality of different rectangles.
+     */
     @Test
     public void testDifferentRectangles() {
         Rectangle rect1 = new Rectangle(10, 10, 20, 20);
@@ -179,14 +203,20 @@ public class RectangleTest extends TestCase {
     }
 
 
+    /**
+     * Tests inequality of a rectangle contained within another rectangle.
+     */
     @Test
     public void testContainedRectangles() {
         Rectangle rect1 = new Rectangle(10, 10, 30, 30);
-        Rectangle rect2 = new Rectangle(15, 15, 5, 5); // Fully inside rect1
+        Rectangle rect2 = new Rectangle(15, 15, 5, 5);
         assertFalse(rect1.equals(rect2));
     }
 
 
+    /**
+     * Tests equality of two identical rectangles.
+     */
     @Test
     public void testEqualRectangles() {
         Rectangle rect1 = new Rectangle(10, 10, 20, 20);
@@ -195,7 +225,9 @@ public class RectangleTest extends TestCase {
     }
 
 
-    // Test for negative x-coordinate
+    /**
+     * Tests invalidity of a rectangle with a negative x-coordinate.
+     */
     @Test
     public void testInvalidXCoordinate() {
         Rectangle rect = new Rectangle(-1, 0, 10, 10);
@@ -203,7 +235,9 @@ public class RectangleTest extends TestCase {
     }
 
 
-    // Test for negative y-coordinate
+    /**
+     * Tests invalidity of a rectangle with a negative y-coordinate.
+     */
     @Test
     public void testInvalidYCoordinate() {
         Rectangle rect = new Rectangle(0, -1, 10, 10);
@@ -211,7 +245,9 @@ public class RectangleTest extends TestCase {
     }
 
 
-    // Test for zero width
+    /**
+     * Tests invalidity of a rectangle with zero width.
+     */
     @Test
     public void testInvalidWidthZero() {
         Rectangle rect = new Rectangle(0, 0, 0, 10);
@@ -219,7 +255,9 @@ public class RectangleTest extends TestCase {
     }
 
 
-    // Test for negative width
+    /**
+     * Tests invalidity of a rectangle with negative width.
+     */
     @Test
     public void testInvalidWidthNegative() {
         Rectangle rect = new Rectangle(0, 0, -10, 10);
@@ -227,7 +265,9 @@ public class RectangleTest extends TestCase {
     }
 
 
-    // Test for zero height
+    /**
+     * Tests invalidity of a rectangle with zero height.
+     */
     @Test
     public void testInvalidHeightZero() {
         Rectangle rect = new Rectangle(0, 0, 10, 0);
@@ -235,7 +275,9 @@ public class RectangleTest extends TestCase {
     }
 
 
-    // Test for negative height
+    /**
+     * Tests invalidity of a rectangle with negative height.
+     */
     @Test
     public void testInvalidHeightNegative() {
         Rectangle rect = new Rectangle(0, 0, 10, -10);
@@ -243,7 +285,9 @@ public class RectangleTest extends TestCase {
     }
 
 
-    // Test for valid rectangle
+    /**
+     * Tests the validity of a properly defined rectangle.
+     */
     @Test
     public void testValidRectangle() {
         Rectangle rect = new Rectangle(0, 0, 10, 10);
