@@ -44,15 +44,15 @@ public class SkipList<K extends Comparable<? super K>, V>
     }
 
 
-    /**
-     * Searches for the KVPair using the key which is a Comparable object.
-     *
-     * @param key
-     *            key to be searched for
-     */
-    public ArrayList<KVPair<K, V>> search(K key) {
-        return null;
-    }
+//    /**
+//     * Searches for the KVPair using the key which is a Comparable object.
+//     *
+//     * @param key
+//     *            key to be searched for
+//     */
+//    public ArrayList<KVPair<K, V>> search(K key) {
+//        return null;
+//    }
 
 
     /**
@@ -144,11 +144,10 @@ public class SkipList<K extends Comparable<? super K>, V>
      *            the KVPair to be removed
      * @return returns the removed pair if the pair was valid and null if not
      */
-
-    @SuppressWarnings("unchecked")
-    public KVPair<K, V> remove(K key) {
-        return null;
-    }
+//    @SuppressWarnings("unchecked")
+//    public KVPair<K, V> remove(K key) {
+//        return null;
+//    }
 
 
     /**
