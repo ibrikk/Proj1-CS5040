@@ -313,12 +313,7 @@ public class SkipList<K extends Comparable<? super K>, V>
      * @return An instance of SkipListIterator.
      */
     @Override
-<<<<<<< HEAD
-    public SkipListIterator iterator() {
-        // TODO Auto-generated method stub
-=======
     public Iterator<KVPair<K, V>> iterator() {
->>>>>>> main
         return new SkipListIterator();
     }
 
