@@ -140,8 +140,20 @@ public class Rectangle {
      * @return true if the rectangle has invalid parameters, false if not
      */
     public boolean isInvalid() {
-        return this.xCoordinate < 0 || this.yCoordinate < 0 || this.width <= 0
-            || this.height <= 0;
+        // Check for negative coordinates or non-positive dimensions
+        if (this.xCoordinate < 0 || this.yCoordinate < 0 || this.width <= 0
+            || this.height <= 0) {
+            return true;
+        }
 
+        // Check if the rectangle extends beyond the right or bottom edge of the
+        // 1024x1024 world box
+        if (this.xCoordinate + this.width > 1024 || this.yCoordinate
+            + this.height > 1024) {
+            return true;
+        }
+
+        // The rectangle is valid and within bounds
+        return false;
     }
 }
