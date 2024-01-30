@@ -3,7 +3,7 @@
  * class is to hold generic KVPair object which will be stored in the SkipList.
  * There is also a toString method for easily translating the objects contained
  * in the KVPair into a human readable string.
- * 
+ *
  * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
  *
  * @version 2024-01-27

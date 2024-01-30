@@ -1,7 +1,7 @@
 /**
  * The purpose of this class is to parse a single line from the command text
  * file according to the format specified in the project specs.
- * 
+ *
  * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
  *
  * @version 2024-01-27
@@ -75,9 +75,9 @@ public class CommandProcessor {
 //
 // }
         else if (command.equals("regionsearch")) {
-            // calls the regionsearch method for a set of coordinates
-            // the string integers in the line will be trimmed of whitespace
-
+            data.regionsearch(Integer.parseInt(arr[1]),
+                Integer.parseInt(arr[2]), Integer.parseInt(arr[3]), Integer
+                .parseInt(arr[4]));
         }
         else if (command.equals("intersections")) {
             // calls the intersections method, no parameters to be passed
