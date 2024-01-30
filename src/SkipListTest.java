@@ -65,6 +65,9 @@ public class SkipListTest extends TestCase {
     }
 
 
+    /**
+     * Tests a big insert
+     */
     @Test
     public void testBigInsert() {
         SkipList<String, Rectangle> skl = new SkipList<>();

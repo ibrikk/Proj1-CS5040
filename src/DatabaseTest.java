@@ -96,7 +96,7 @@ public class DatabaseTest extends TestCase {
      * Tests invalid insert
      */
     @Test
-    public void testInsert_Invalid1() {
+    public void testInsertInvalid1() {
         Rectangle rec1 = new Rectangle(0, 0, 100, 100);
         Rectangle rec2 = new Rectangle(99, 99, 924, 924);
         Rectangle recNotValid = new Rectangle(-99, -99, 924, 924);
