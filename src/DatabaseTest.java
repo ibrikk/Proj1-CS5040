@@ -66,6 +66,32 @@ public class DatabaseTest extends TestCase {
             + " and underscore characters.");
     }
 
+    @Test
+    public void testInsert_Invalid1() {
+        Rectangle rec1 = new Rectangle(0, 0, 100, 100);
+        Rectangle rec2 = new Rectangle(99, 99, 924, 924);
+        Rectangle recNotValid = new Rectangle(-99, -99, 924, 924);
+        KVPair<String, Rectangle> it1 = new KVPair<>("A", rec1);
+        KVPair<String, Rectangle> it2 = new KVPair<>("B", rec2);
+        KVPair<String, Rectangle> it3 = new KVPair<>("C",recNotValid);
+        db.insert(it3);
+        db.insert(it3);
+        db.insert(it3);
+        db.insert(it3);
+
+        for (int i=0;i<100;i++) {
+            if (i%2==0) {
+                db.insert(it1);
+            }
+            else {
+                db.insert(it2);
+            }
+        }
+
+        assertEquals(db.size(), 100);
+    }
+
+
 
     @Test
     public void testValidNameWithLettersAndDigits() {

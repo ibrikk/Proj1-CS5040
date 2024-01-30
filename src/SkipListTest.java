@@ -54,6 +54,32 @@ public class SkipListTest extends TestCase {
         assertEquals(skl.size(), 3);
     }
 
+    @Test
+    public void testBigInsert() {
+        SkipList<String, Rectangle> skl = new SkipList<>();
+        Rectangle rec1 = new Rectangle(0, 0, 100, 100);
+        Rectangle rec2 = new Rectangle(99, 99, 924, 924);
+        Rectangle recNotValid = new Rectangle(-99, -99, 924, 924);
+        KVPair<String, Rectangle> it1 = new KVPair<>("A", rec1);
+        KVPair<String, Rectangle> it2 = new KVPair<>("B", rec2);
+        KVPair<String, Rectangle> it3 = new KVPair<>("C",recNotValid);
+        skl.insert(it3);
+        skl.insert(it3);
+        skl.insert(it3);
+        skl.insert(it3);
+
+        for (int i=0;i<100;i++) {
+            if (i%2==0) {
+                skl.insert(it1);
+            }
+            else {
+                skl.insert(it2);
+            }
+        }
+        assertEquals(skl.size(), 104);
+        assertNull(skl.getHeadElement());
+    }
+
 
     @Test
     public void testAdjustHead() {

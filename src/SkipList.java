@@ -6,7 +6,7 @@ import java.util.Random;
 /**
  * This class implements SkipList data structure and contains an inner SkipNode
  * class which the SkipList will make an array of to store data.
- * 
+ *
  * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
  *
  * @version 2024-01-27
@@ -88,6 +88,10 @@ public class SkipList<K extends Comparable<? super K>, V>
      */
     @SuppressWarnings("unchecked")
     public void insert(KVPair<K, V> it) {
+        if (it==null) {
+            return;
+        }
+
         int newLevel = randomLevel();
         if (newLevel > head.level) {
             adjustHead(newLevel);
@@ -230,16 +234,18 @@ public class SkipList<K extends Comparable<? super K>, V>
             return pair;
         }
 
-<<<<<<< HEAD
+        /**
+         * Returns the level of the node as an integer.
+         *
+         * @return level
+         */
         public int getLevel() {
             return level;
-=======
-        public String toString() {
-            return "("+pair.getKey()+", "+pair.getValue()+")";
->>>>>>> origin/dump
         }
 
-    }
+        }
+
+
 
 
     private class SkipListIterator implements Iterator<KVPair<K, V>> {
@@ -265,14 +271,12 @@ public class SkipList<K extends Comparable<? super K>, V>
             return elem;
         }
 
-<<<<<<< HEAD
         public int getSkipNodeLevel() {
             return current.getLevel();
-=======
+        }
 
         public int getDepth() {
             return current.forward.length;
->>>>>>> main
         }
 
     }

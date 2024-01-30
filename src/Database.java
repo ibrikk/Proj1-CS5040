@@ -12,7 +12,7 @@ import java.util.Iterator;
  * Also note that the Database class will have a clearer role in Project2, where
  * we will have two data structures. The Database class will then determine
  * which command should be directed to which data structure.
- * 
+ *
  * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
  *
  * @version 2024-01-27
@@ -187,5 +187,12 @@ public class Database {
      */
     public void dump() {
         list.dump();
+    }
+
+    /**
+     * Returns the total size of the database ie the size of the SkipList
+     */
+    public int size() {
+        return list.size();
     }
 }
