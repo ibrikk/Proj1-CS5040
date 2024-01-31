@@ -207,7 +207,25 @@ public class Database
      */
     public void intersections()
     {
-
+        System.out.println("Intersection pairs:");
+        itr1 = list.iterator();
+        while (itr1.hasNext())
+        {
+            KVPair<String, Rectangle> OuterPair = itr1.next();
+            Rectangle outerRectangle = OuterPair.getValue();
+            Iterator<KVPair<String, Rectangle>> itrInner = list.iterator();
+            while (itrInner.hasNext())
+            {
+                KVPair<String, Rectangle> innerPair = itrInner.next();
+                Rectangle innerRectangle = innerPair.getValue();
+                if (outerRectangle.intersect(innerRectangle)&&outerRectangle!=innerRectangle)
+                {
+                    System.out.println(
+                        "(" + OuterPair.getKey() + ", " + outerRectangle + " | "
+                            + innerPair.getKey() + ", " + innerRectangle + ")");
+                }
+            }
+        }
     }
 
 
@@ -237,6 +255,7 @@ public class Database
 
     /**
      * Returns the total size of the database ie the size of the SkipList
+     *
      * @return size
      */
     public int size()
