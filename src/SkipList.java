@@ -43,15 +43,39 @@ public class SkipList<K extends Comparable<? super K>, V>
         return lev; // returns a random level
     }
 
-// /**
-// * Searches for the KVPair using the key which is a Comparable object.
-// *
-// * @param key
-// * key to be searched for
-// */
-// public ArrayList<KVPair<K, V>> search(K key) {
-// return null;
-// }
+
+    /**
+     * Searches for the KVPair using the key which is a Comparable object.
+     *
+     * @param key
+     *            key to be searched for
+     */
+    public ArrayList<KVPair<K, V>> search(K key) {
+        ArrayList<KVPair<K, V>> foundRectangles = new ArrayList<>();
+        SkipNode x = head; // Start at header node
+        for (int i = head.level; i >= 0; i--) {
+            while ((x.forward[i] != null) && (x.forward[i].element().getKey()
+                .compareTo(key) < 0)) {
+                x = x.forward[i];
+            }
+        }
+        x = x.forward[0];
+        if ((x != null) && (x.element().getKey().compareTo(key) == 0)) {
+            foundRectangles.add(x.pair);
+        }
+        if (foundRectangles.size() > 0) {
+            System.out.println("Rectangles found:");
+            for (KVPair<K, V> pair : foundRectangles) {
+                System.out.println("(" + pair.getKey() + ", " + pair.getValue()
+                    .toString() + ")");
+            }
+        }
+        else {
+            System.out.println("Rectangle not found: (" + key + ")");
+        }
+
+        return foundRectangles;
+    }
 
 
     /**

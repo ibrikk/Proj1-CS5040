@@ -86,6 +86,7 @@ public class CommandProcessor {
         }
         else if (command.equals("search")) {
             // calls the search method for a name of object
+            data.search(arr[1]);
 
         }
         else if (command.equals("dump")) {

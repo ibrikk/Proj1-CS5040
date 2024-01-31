@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 import student.TestCase;
@@ -164,6 +165,25 @@ public class SkipListTest extends TestCase {
         assertTrue(output.contains("value (key1, 1, 2, 3, 4)"));
         assertTrue(output.contains("value (key2, 5, 6, 7, 8)"));
         assertTrue(output.endsWith("SkipList size is: 2\n"));
+    }
+
+
+    /**
+     * Tests the search method of the SkipList class.
+     */
+    @Test
+    public void testSearch() {
+        SkipList<String, Rectangle> skl = new SkipList<>();
+        Rectangle rec1 = new Rectangle(0, 0, 100, 100);
+        Rectangle rec2 = new Rectangle(99, 99, 924, 924);
+        KVPair<String, Rectangle> it1 = new KVPair<>("A", rec1);
+        KVPair<String, Rectangle> it2 = new KVPair<>("B", rec2);
+        skl.insert(it1);
+        skl.insert(it2);
+        ArrayList<KVPair<String, Rectangle>> output1 = skl.search("B");
+        assertEquals(output1.get(0).getKey(), "B");
+        ArrayList<KVPair<String, Rectangle>> output2 = skl.search("B");
+        assertEquals(output2.get(0).getKey(), "B");
     }
 
 }
