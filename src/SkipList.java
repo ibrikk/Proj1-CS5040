@@ -43,15 +43,52 @@ public class SkipList<K extends Comparable<? super K>, V>
         return lev; // returns a random level
     }
 
-// /**
-// * Searches for the KVPair using the key which is a Comparable object.
-// *
-// * @param key
-// * key to be searched for
-// */
-// public ArrayList<KVPair<K, V>> search(K key) {
-// return null;
-// }
+
+    /**
+     * Searches for the KVPair using the key which is a Comparable object.
+     *
+     * @param key
+     *            key to be searched for
+     * @return foundRectangles
+     *         arraylist of found rectangles
+     */
+    public ArrayList<KVPair<K, V>> search(K key) {
+        ArrayList<KVPair<K, V>> foundRectangles = new ArrayList<>();
+        SkipNode x = head; // Start at header node
+
+        // Traverse down the levels
+        for (int i = head.level; i >= 0; i--) {
+            while ((x.forward[i] != null) && (x.forward[i].element().getKey()
+                .compareTo(key) < 0)) {
+                x = x.forward[i];
+            }
+        }
+
+        // Move to the first element at the bottom level that is not less than
+        // the key
+        x = x.forward[0];
+
+        // Traverse along the bottom level and collect all KVPairs with the
+        // matching key
+        while ((x != null) && (x.element().getKey().compareTo(key) == 0)) {
+            foundRectangles.add(x.pair);
+            x = x.forward[0];
+        }
+
+        // Print found rectangles or a not-found message
+        if (!foundRectangles.isEmpty()) {
+            System.out.println("Rectangles found:");
+            for (KVPair<K, V> pair : foundRectangles) {
+                System.out.println("(" + pair.getKey() + ", " + pair.getValue()
+                    .toString() + ")");
+            }
+        }
+        else {
+            System.out.println("Rectangle not found: (" + key + ")");
+        }
+
+        return foundRectangles;
+    }
 
 
     /**

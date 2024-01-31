@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 import student.TestCase;
@@ -30,13 +31,23 @@ import student.TestCase;
  * @version 2024-01-27
  */
 public class SkipListTest extends TestCase {
+
+    private SkipList<String, Rectangle> skipList;
+
     /**
      * Sets up the test fixture.
      * Called before every test case method.
      */
     @Before
     public void setUp() {
-        // Nothing here
+        skipList = new SkipList<>();
+        // Inserting some rectangles with different keys and same keys
+        skipList.insert(new KVPair<>("R1", new Rectangle(0, 0, 10, 10)));
+        skipList.insert(new KVPair<>("R2", new Rectangle(10, 10, 20, 20)));
+        skipList.insert(new KVPair<>("R2", new Rectangle(15, 15, 25, 25)));
+        // Duplicate
+        // key
+        skipList.insert(new KVPair<>("R3", new Rectangle(20, 20, 30, 30)));
     }
 
 
@@ -164,6 +175,102 @@ public class SkipListTest extends TestCase {
         assertTrue(output.contains("value (key1, 1, 2, 3, 4)"));
         assertTrue(output.contains("value (key2, 5, 6, 7, 8)"));
         assertTrue(output.endsWith("SkipList size is: 2\n"));
+    }
+
+
+    /**
+     * Tests the search method of the SkipList class.
+     */
+    @Test
+    public void testSearch() {
+        SkipList<String, Rectangle> skl = new SkipList<>();
+        Rectangle rec1 = new Rectangle(0, 0, 100, 100);
+        Rectangle rec2 = new Rectangle(99, 99, 924, 924);
+        KVPair<String, Rectangle> it1 = new KVPair<>("A", rec1);
+        KVPair<String, Rectangle> it2 = new KVPair<>("B", rec2);
+        skl.insert(it1);
+        skl.insert(it2);
+        ArrayList<KVPair<String, Rectangle>> output1 = skl.search("B");
+        assertEquals(output1.get(0).getKey(), "B");
+        skl.insert(it2);
+        ArrayList<KVPair<String, Rectangle>> output2 = skl.search("B");
+        assertEquals(output2.get(0).getKey(), "B");
+        assertEquals(output2.get(1).getKey(), "B");
+    }
+
+
+    /**
+     * Tests searching for a key that exists in the SkipList. This test ensures
+     * that the search method can find and return all instances of a given key.
+     */
+    @Test
+    public void testSearchForExistingKey() {
+        ArrayList<KVPair<String, Rectangle>> result = skipList.search("R2");
+        assertEquals(2, result.size()); // Expecting 2 results for "R2"
+    }
+
+
+    /**
+     * Tests searching for a key that does not exist in the SkipList. This test
+     * verifies that the search method correctly returns an empty list when the
+     * searched key is not present.
+     */
+    @Test
+    public void testSearchForNonExistingKey() {
+        ArrayList<KVPair<String, Rectangle>> result = skipList.search("R4");
+        assertTrue(result.isEmpty()); // No results expected for "R4"
+    }
+
+
+    /**
+     * Tests searching for a key at different levels in the SkipList. This test
+     * checks whether the search method can navigate through multiple levels
+     * correctly and find all instances of a given key.
+     */
+    @Test
+    public void testSearchAtDifferentLevels() {
+        // Inserting more rectangles to potentially increase SkipList levels
+        skipList.insert(new KVPair<>("R2", new Rectangle(30, 30, 40, 40)));
+        skipList.insert(new KVPair<>("R2", new Rectangle(35, 35, 45, 45)));
+
+        ArrayList<KVPair<String, Rectangle>> result = skipList.search("R2");
+        assertEquals(4, result.size()); // 4 results expected for "R2"
+    }
+
+
+    /**
+     * Tests searching in an empty SkipList. This test ensures that the search
+     * method can handle an empty list scenario without errors and returns an
+     * empty list.
+     */
+    @Test
+    public void testSearchWithEmptySkipList() {
+        SkipList<String, Rectangle> emptySkipList = new SkipList<>();
+        ArrayList<KVPair<String, Rectangle>> result = emptySkipList.search(
+            "R1");
+        assertTrue(result.isEmpty()); // No results expected in an empty
+                                      // SkipList
+    }
+
+
+    /**
+     * Tests the order of the search results. This test ensures that the search
+     * method returns the results in the correct order based on their insertion
+     * order in the SkipList.
+     */
+    @Test
+    public void testSearchResultOrder() {
+        // This test ensures that the search results are in the correct order
+        ArrayList<KVPair<String, Rectangle>> result = skipList.search("R2");
+        // Verify the order of rectangles in the result
+        assertEquals(10, result.get(1).getValue().getxCoordinate());
+        assertEquals(10, result.get(1).getValue().getyCoordinate());
+        assertEquals(20, result.get(1).getValue().getWidth());
+        assertEquals(20, result.get(1).getValue().getHeight());
+        assertEquals(15, result.get(0).getValue().getxCoordinate());
+        assertEquals(15, result.get(0).getValue().getyCoordinate());
+        assertEquals(25, result.get(0).getValue().getWidth());
+        assertEquals(25, result.get(0).getValue().getHeight());
     }
 
 }

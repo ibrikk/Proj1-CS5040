@@ -15,8 +15,7 @@ import java.util.Iterator;
  * @author Ibrahim Khalilov {ibrahimk}, Francisca Wood {franciscawood}
  * @version 2024-01-27
  */
-public class Database
-{
+public class Database {
 
     // this is the SkipList object that we are using
     // a string for the name of the rectangle and then
@@ -35,8 +34,7 @@ public class Database
      * The constructor for this class initializes a SkipList object with String
      * and Rectangle a its parameters.
      */
-    public Database()
-    {
+    public Database() {
         list = new SkipList<String, Rectangle>();
     }
 
@@ -50,30 +48,24 @@ public class Database
      * @param pair
      *            the KVPair to be inserted
      */
-    public void insert(KVPair<String, Rectangle> pair)
-    {
+    public void insert(KVPair<String, Rectangle> pair) {
         // Delegates the decision mostly to SkipList, only
         // writing the correct message to the console from
         // that
-        if (!(isValidAscii(pair.getKey())))
-        {
-            System.out.println(
-                "The name must begin with a letter, "
-                    + "and may contain letters, digits,"
-                    + " and underscore characters.");
+        if (!(isValidAscii(pair.getKey()))) {
+            System.out.println("The name must begin with a letter, "
+                + "and may contain letters, digits,"
+                + " and underscore characters.");
             return;
         }
-        if (pair.getValue().isInvalid())
-        {
-            System.out.println(
-                "Rectangle rejected: (" + pair.getKey() + ", "
-                    + pair.getValue().toString() + ")");
+        if (pair.getValue().isInvalid()) {
+            System.out.println("Rectangle rejected: (" + pair.getKey() + ", "
+                + pair.getValue().toString() + ")");
             return;
         }
         list.insert(pair);
-        System.out.println(
-            "Rectangle inserted: (" + pair.getKey() + ", "
-                + pair.getValue().toString() + ")");
+        System.out.println("Rectangle inserted: (" + pair.getKey() + ", " + pair
+            .getValue().toString() + ")");
     }
 
 
@@ -86,30 +78,25 @@ public class Database
      * @param key
      *            The string to be validated.
      * @return true if the string is valid according to the specified ASCII
-     *             format, false otherwise.
+     *         format, false otherwise.
      */
-    public boolean isValidAscii(String key)
-    {
-        if (key == null || key.isEmpty())
-        {
+    public boolean isValidAscii(String key) {
+        if (key == null || key.isEmpty()) {
             return false;
         }
 
         // Check first character is a letter
         char firstChar = key.charAt(0);
-        if (!((firstChar >= 'A' && firstChar <= 'Z')
-            || (firstChar >= 'a' && firstChar <= 'z')))
-        {
+        if (!((firstChar >= 'A' && firstChar <= 'Z') || (firstChar >= 'a'
+            && firstChar <= 'z'))) {
             return false;
         }
 
         // Check remaining characters
-        for (int i = 1; i < key.length(); i++)
-        {
+        for (int i = 1; i < key.length(); i++) {
             char ch = key.charAt(i);
             if (!((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z')
-                || (ch >= '0' && ch <= '9') || (ch == '_')))
-            {
+                || (ch >= '0' && ch <= '9') || (ch == '_'))) {
                 return false;
             }
         }
@@ -125,8 +112,7 @@ public class Database
      * @param name
      *            the name of the rectangle to be removed
      */
-    public void remove(String name)
-    {
+    public void remove(String name) {
 
     }
 
@@ -144,8 +130,7 @@ public class Database
      * @param h
      *            height of the rectangle to be removed
      */
-    public void remove(int x, int y, int w, int h)
-    {
+    public void remove(int x, int y, int w, int h) {
 
     }
 
@@ -165,35 +150,28 @@ public class Database
      * @param h
      *            height of the region
      */
-    public void regionsearch(int x, int y, int w, int h)
-    {
+    public void regionsearch(int x, int y, int w, int h) {
         Rectangle regionSearch = new Rectangle(x, y, w, h);
         // if any numbers are negative, then we have an invalid search
         // we can have w and height that fall outside of 1024x1024
-        if (regionSearch.isInvalidRegionSearch())
-        {
-            System.out.println(
-                "Rectangle rejected: (" + x + ", " + y + ", " + w + ", " + h
-                    + ")");
+        if (regionSearch.isInvalidRegionSearch()) {
+            System.out.println("Rectangle rejected: (" + x + ", " + y + ", " + w
+                + ", " + h + ")");
             return;
         }
-
 
         // Initialize iterator
         Iterator<KVPair<String, Rectangle>> itr = list.iterator();
 
         // Iterate through the SkipList using the iterator
-        System.out.println(
-            "Rectangles intersecting region (" + x + ", " + y + ", " + w + ", "
-                + h + "):");
-        while (itr.hasNext())
-        {
+        System.out.println("Rectangles intersecting region (" + x + ", " + y
+            + ", " + w + ", " + h + "):");
+        while (itr.hasNext()) {
             KVPair<String, Rectangle> pair = itr.next();
             Rectangle thisRectangle = pair.getValue();
-            if (regionSearch.intersect(thisRectangle))
-            {
-                System.out
-                    .println("(" + pair.getKey() + ", " + thisRectangle + ")");
+            if (regionSearch.intersect(thisRectangle)) {
+                System.out.println("(" + pair.getKey() + ", " + thisRectangle
+                    + ")");
             }
         }
     }
@@ -205,24 +183,21 @@ public class Database
      * the SkipList needs to be agnostic about the fact that it is storing
      * Rectangles.
      */
-    public void intersections()
-    {
+    public void intersections() {
         System.out.println("Intersection pairs:");
         itr1 = list.iterator();
-        while (itr1.hasNext())
-        {
-            KVPair<String, Rectangle> OuterPair = itr1.next();
-            Rectangle outerRectangle = OuterPair.getValue();
+        while (itr1.hasNext()) {
+            KVPair<String, Rectangle> outerPair = itr1.next();
+            Rectangle outerRectangle = outerPair.getValue();
             Iterator<KVPair<String, Rectangle>> itrInner = list.iterator();
-            while (itrInner.hasNext())
-            {
+            while (itrInner.hasNext()) {
                 KVPair<String, Rectangle> innerPair = itrInner.next();
                 Rectangle innerRectangle = innerPair.getValue();
-                if (outerRectangle.intersect(innerRectangle)&&outerRectangle!=innerRectangle)
-                {
-                    System.out.println(
-                        "(" + OuterPair.getKey() + ", " + outerRectangle + " | "
-                            + innerPair.getKey() + ", " + innerRectangle + ")");
+                if (outerRectangle.intersect(innerRectangle)
+                    && outerRectangle != innerRectangle) {
+                    System.out.println("(" + outerPair.getKey() + ", "
+                        + outerRectangle + " | " + innerPair.getKey() + ", "
+                        + innerRectangle + ")");
                 }
             }
         }
@@ -236,9 +211,8 @@ public class Database
      * @param name
      *            name of the Rectangle to be searched for
      */
-    public void search(String name)
-    {
-
+    public void search(String name) {
+        list.search(name);
     }
 
 
@@ -247,8 +221,7 @@ public class Database
      * size of the SkipList and shows all of the contents of the SkipList. This
      * will all be delegated to the SkipList.
      */
-    public void dump()
-    {
+    public void dump() {
         list.dump();
     }
 
@@ -258,8 +231,7 @@ public class Database
      *
      * @return size
      */
-    public int size()
-    {
+    public int size() {
         return list.size();
     }
 }
