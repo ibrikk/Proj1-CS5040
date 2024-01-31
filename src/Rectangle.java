@@ -157,6 +157,7 @@ public class Rectangle {
         return false;
     }
 
+
     /**
      * Checks if the rectangle has invalid parameters
      *
@@ -167,7 +168,6 @@ public class Rectangle {
         if (this.width <= 0 || this.height <= 0) {
             return true;
         }
-
 
         // The rectangle region search is valid
         return false;

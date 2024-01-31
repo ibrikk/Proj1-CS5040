@@ -77,6 +77,7 @@ public class CommandProcessorTest extends TestCase {
             "Rectangle rejected: (5, 900, 0, 1)");
     }
 
+
     /**
      * Test many inserts
      */
@@ -93,11 +94,10 @@ public class CommandProcessorTest extends TestCase {
         cmdp.processor(cmd4);
         systemOut().clearHistory();
         cmdp.processor("intersections");
-        assertFuzzyEquals(systemOut().getHistory(),
-            "Intersection pairs:\r\n"
+        assertFuzzyEquals(systemOut().getHistory(), "Intersection pairs:\r\n"
             + "(a, 10, 10, 15, 15 | b, 11, 11, 5, 5)\r\n"
             + "(b, 11, 11, 5, 5 | a, 10, 10, 15, 15)\r\n"
             + "(c, 0, 0, 1000, 10 | d, 0, 0, 10, 1000)\r\n"
             + "(d, 0, 0, 10, 1000 | c, 0, 0, 1000, 10)");
-        }
+    }
 }
