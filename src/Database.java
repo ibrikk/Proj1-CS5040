@@ -113,7 +113,7 @@ public class Database {
      *            the name of the rectangle to be removed
      */
     public void remove(String name) {
-
+        list.remove(name);
     }
 
 

@@ -175,6 +175,7 @@ public class SkipList<K extends Comparable<? super K>, V>
         head = newHead; // Update the head reference
     }
 
+
     /**
      * Removes the KVPair that is passed in as a parameter and returns true if
      * the pair was valid and false if not.
@@ -183,10 +184,50 @@ public class SkipList<K extends Comparable<? super K>, V>
      *            the KVPair to be removed
      * @return returns the removed pair if the pair was valid and null if not
      */
-// @SuppressWarnings("unchecked")
-// public KVPair<K, V> remove(K key) {
-// return null;
-// }
+    @SuppressWarnings("unchecked")
+    public KVPair<K, V> remove(K key) {
+        if (key == null) {
+            System.out.println("Rectangle not removed: " + key);
+            return null;
+        }
+
+        // Array to keep track of the nodes that are just before the node to be
+        // removed.
+        SkipNode[] update = (SkipNode[])Array.newInstance(
+            SkipList.SkipNode.class, head.level + 1);
+
+        SkipNode x = head;
+
+        // Find the position just before the node to be removed.
+        for (int i = head.level; i >= 0; i--) {
+            while (x.forward[i] != null && x.forward[i].element().getKey()
+                .compareTo(key) < 0) {
+                x = x.forward[i];
+            }
+            update[i] = x;
+        }
+
+        x = x.forward[0];
+
+        // Remove the node if it has the key.
+        if (x != null && x.element().getKey().compareTo(key) == 0) {
+            for (int i = 0; i <= head.level; i++) {
+                if (update[i].forward[i] != x) {
+                    break;
+                }
+                update[i].forward[i] = x.forward[i];
+            }
+
+            size--;
+            System.out.println("Rectangle removed: (" + x.pair.getKey() + ", "
+                + x.pair.getValue().toString() + ")");
+            return x.pair;
+        }
+
+        // If no rectangle with the key is found, print the appropriate message.
+        System.out.println("Rectangle not removed: " + key);
+        return null;
+    }
 
 
     /**
@@ -196,9 +237,73 @@ public class SkipList<K extends Comparable<? super K>, V>
      *            the value of the KVPair to be removed
      * @return returns true if the removal was successful
      */
+    @SuppressWarnings("unchecked")
     public KVPair<K, V> removeByValue(V val) {
+        if (val == null || !(val instanceof Rectangle)) {
+            System.out.println("Rectangle not found: " + val);
+            return null;
+        }
 
-        return null;
+        Rectangle rectToRemove = (Rectangle)val;
+        if (rectToRemove.isInvalid()) {
+            System.out.println("Rectangle rejected: (" + val + ")");
+            return null;
+        }
+        KVPair<K, V> removedPair = null;
+        SkipListIterator iterator = new SkipListIterator();
+
+        // Create an array to store the nodes just before the potential removal
+        // points
+        SkipNode[] update = (SkipNode[])Array.newInstance(
+            SkipList.SkipNode.class, head.level + 1);
+        SkipNode x = head;
+
+        // Initialize update array
+        for (int i = 0; i < update.length; i++) {
+            update[i] = head;
+        }
+
+        while (iterator.hasNext()) {
+            SkipNode currentNode = iterator.current;
+            // TODO: FIX HERE
+            if (currentNode.element() != null && rectToRemove.equals(currentNode
+                .element().getValue())) {
+                // Found a node to remove
+                for (int i = 0; i <= head.level; i++) {
+                    if (update[i].forward[i] != currentNode) {
+                        break;
+                    }
+                    update[i].forward[i] = currentNode.forward[i];
+                }
+                if (removedPair == null) {
+                    removedPair = currentNode.pair;
+                }
+                size--;
+                System.out.println("Rectangle removed: (" + currentNode.pair
+                    .getKey() + ", " + rectToRemove.toString() + ")");
+                // Move iterator to next node after the removed node
+                iterator.next();
+            }
+            else {
+                // Move to next node and update the update array
+                for (int i = 0; i <= head.level; i++) {
+                    if (iterator.current.forward[i] != null && !rectToRemove
+                        .equals(iterator.current.forward[i].element()
+                            .getValue())) {
+                        update[i] = iterator.current;
+                    }
+                }
+                iterator.next();
+            }
+        }
+
+        if (removedPair == null) {
+            System.out.println("Rectangle not found: " + rectToRemove
+                .toString());
+            return null;
+        }
+
+        return removedPair;
     }
 
 
