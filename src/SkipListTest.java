@@ -182,8 +182,10 @@ public class SkipListTest extends TestCase {
         skl.insert(it2);
         ArrayList<KVPair<String, Rectangle>> output1 = skl.search("B");
         assertEquals(output1.get(0).getKey(), "B");
+        skl.insert(it2);
         ArrayList<KVPair<String, Rectangle>> output2 = skl.search("B");
         assertEquals(output2.get(0).getKey(), "B");
+        assertEquals(output2.get(1).getKey(), "B");
     }
 
 }
