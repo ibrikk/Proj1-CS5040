@@ -349,8 +349,8 @@ public class SkipListTest extends TestCase {
         assertEquals(1, skipList2.size());
         KVPair<String, Rectangle> removedPair = skipList2.removeByValue(rect);
         assertNotNull(removedPair);
-//        assertEquals("R1", removedPair.getKey());
-//        assertEquals(0, skipList2.size());
+        assertEquals("R1", removedPair.getKey());
+        assertEquals(0, skipList2.size());
     }
 
 

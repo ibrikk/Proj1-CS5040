@@ -296,7 +296,7 @@ public class SkipList<K extends Comparable<? super K>, V>
                 iterator.next();
             }
         }
-
+// TODO: removedPair is null sometimes
         if (removedPair == null) {
             System.out.println("Rectangle not found: " + rectToRemove
                 .toString());
