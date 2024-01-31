@@ -187,15 +187,15 @@ public class Database {
         System.out.println("Intersection pairs:");
         itr1 = list.iterator();
         while (itr1.hasNext()) {
-            KVPair<String, Rectangle> OuterPair = itr1.next();
-            Rectangle outerRectangle = OuterPair.getValue();
+            KVPair<String, Rectangle> outerPair = itr1.next();
+            Rectangle outerRectangle = outerPair.getValue();
             Iterator<KVPair<String, Rectangle>> itrInner = list.iterator();
             while (itrInner.hasNext()) {
                 KVPair<String, Rectangle> innerPair = itrInner.next();
                 Rectangle innerRectangle = innerPair.getValue();
                 if (outerRectangle.intersect(innerRectangle)
                     && outerRectangle != innerRectangle) {
-                    System.out.println("(" + OuterPair.getKey() + ", "
+                    System.out.println("(" + outerPair.getKey() + ", "
                         + outerRectangle + " | " + innerPair.getKey() + ", "
                         + innerRectangle + ")");
                 }

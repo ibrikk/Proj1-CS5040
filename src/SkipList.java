@@ -49,6 +49,8 @@ public class SkipList<K extends Comparable<? super K>, V>
      *
      * @param key
      *            key to be searched for
+     * @return foundRectangles
+     *         arraylist of found rectangles
      */
     public ArrayList<KVPair<K, V>> search(K key) {
         ArrayList<KVPair<K, V>> foundRectangles = new ArrayList<>();
