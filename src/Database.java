@@ -131,7 +131,12 @@ public class Database {
      *            height of the rectangle to be removed
      */
     public void remove(int x, int y, int w, int h) {
-
+        Rectangle rect = new Rectangle(x, y, w, h);
+        if (rect.isInvalid()) {
+            System.out.println("Rectangle rejected: (" + rect.toString() + ")");
+            return;
+        }
+        list.removeByValue(rect);
     }
 
 

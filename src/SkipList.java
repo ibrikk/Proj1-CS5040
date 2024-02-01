@@ -245,10 +245,6 @@ public class SkipList<K extends Comparable<? super K>, V>
         }
 
         Rectangle rectToRemove = (Rectangle)val;
-        if (rectToRemove.isInvalid()) {
-            System.out.println("Rectangle rejected: (" + val + ")");
-            return null;
-        }
         KVPair<K, V> removedPair = null;
         SkipListIterator iterator = new SkipListIterator();
 
@@ -256,7 +252,7 @@ public class SkipList<K extends Comparable<? super K>, V>
         // points
         SkipNode[] update = (SkipNode[])Array.newInstance(
             SkipList.SkipNode.class, head.level + 1);
-        SkipNode x = head;
+//        SkipNode x = head;
 
         // Initialize update array
         for (int i = 0; i < update.length; i++) {

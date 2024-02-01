@@ -352,4 +352,5 @@ public class DatabaseTest extends TestCase {
         assertFalse(db.isValidAscii("/"));
         assertFalse(db.isValidAscii(":"));
     }
+
 }

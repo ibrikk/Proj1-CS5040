@@ -372,14 +372,7 @@ public class SkipListTest extends TestCase {
     }
 
 
-    @Test
-    public void testRemoveWithInvalidType() {
-        Rectangle rect = new Rectangle(-10, 10, 5, 5);
-        systemOut().clearHistory();
-        skipList2.removeByValue(rect);
-        String output = systemOut().getHistory();
-        assertFuzzyEquals(output, "Rectangle rejected: (-10, 10, 5, 5)");
-    }
+    
 
 
     @Test
