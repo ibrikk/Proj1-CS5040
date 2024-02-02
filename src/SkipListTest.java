@@ -340,6 +340,11 @@ public class SkipListTest extends TestCase {
     }
 
 
+    /**
+     * Tests the removal of an existing rectangle from the SkipList.
+     * Ensures that a rectangle that exists within the SkipList is correctly
+     * removed, and the size of the SkipList is decremented accordingly.
+     */
     @Test
     public void testRemoveExistingRectangle() {
         Rectangle rect = new Rectangle(10, 10, 5, 5);
@@ -352,41 +357,69 @@ public class SkipListTest extends TestCase {
         assertEquals("R1", removedPair.getKey());
         assertEquals(0, skipList2.size());
     }
-//
-//
-// @Test
-// public void testRemoveNonExistingRectangle() {
-// Rectangle rect = new Rectangle(10, 10, 5, 5);
-// KVPair<String, Rectangle> removedPair = skipList2.removeByValue(rect);
-// assertNull(removedPair);
-// assertEquals(0, skipList2.size());
-// }
-//
-//
-// @Test
-// public void testRemoveWithNullValue() {
-// systemOut().clearHistory();
-// skipList2.removeByValue(null);
-// String output = systemOut().getHistory();
-// assertFuzzyEquals(output, "Rectangle not found: null");
-// }
-//
-//
-//
-//
-//
-// @Test
-// public void testRemoveOneOfMultipleRectangles() {
-// Rectangle rect1 = new Rectangle(10, 10, 5, 5);
-// Rectangle rect2 = new Rectangle(15, 15, 5, 5);
-// skipList2.insert(new KVPair<>("R1", rect1));
-// skipList2.insert(new KVPair<>("R2", rect2));
-//
-// assertEquals(2, skipList2.size());
-// KVPair<String, Rectangle> removedPair = skipList2.removeByValue(rect1);
-// assertNotNull(removedPair);
-// assertEquals("R1", removedPair.getKey());
-// assertEquals(1, skipList2.size());
-// }
+
+
+    /**
+     * Tests the attempt to remove a rectangle that does not exist in the
+     * SkipList.
+     * Verifies that the method correctly identifies non-existent rectangles,
+     * does not alter the size of the SkipList, and returns null.
+     */
+    @Test
+    public void testRemoveNonExistingRectangle() {
+        Rectangle rect = new Rectangle(10, 10, 5, 5);
+        KVPair<String, Rectangle> removedPair = skipList2.removeByValue(rect);
+        assertNull(removedPair);
+        assertEquals(0, skipList2.size());
+    }
+
+
+    /**
+     * Tests the behavior of the removal method when a null value is passed.
+     * This test ensures that attempting to remove a null value correctly
+     * results in no change to the SkipList and the appropriate message is
+     * printed.
+     */
+    @Test
+    public void testRemoveWithNullValue() {
+        systemOut().clearHistory();
+        skipList2.removeByValue(null);
+        String output = systemOut().getHistory();
+        assertFuzzyEquals(output, "Rectangle not found: null");
+    }
+
+
+    /**
+     * Tests the removal of one rectangle when multiple rectangles are present
+     * in the SkipList. This test verifies that the correct rectangle is removed
+     * based on the value and that the SkipList size is updated correctly.
+     */
+    @Test
+    public void testRemoveOneOfMultipleRectangles() {
+        Rectangle rect1 = new Rectangle(10, 10, 5, 5);
+        Rectangle rect2 = new Rectangle(15, 15, 5, 5);
+        skipList2.insert(new KVPair<>("R1", rect1));
+        skipList2.insert(new KVPair<>("R2", rect2));
+
+        assertEquals(2, skipList2.size());
+        KVPair<String, Rectangle> removedPair = skipList2.removeByValue(rect1);
+        assertNotNull(removedPair);
+        assertEquals("R1", removedPair.getKey());
+        assertEquals(1, skipList2.size());
+    }
+
+
+    @Test
+    public void testRemove() {
+        Rectangle rect = new Rectangle(10, 10, 20, 20);
+        skipList1.insert(new KVPair<>("A", rect));
+        Rectangle rect1 = new Rectangle(10, 10, 20, 20);
+        skipList1.insert(new KVPair<>("A", rect));
+        skipList1.insert(new KVPair<>("B", rect1));
+        assertEquals(3, skipList1.size());
+        KVPair<String, Rectangle> removed = skipList1.remove("B");
+        assertNotNull(removed);
+        assertEquals(2, skipList1.size());
+    }
 
 }
