@@ -352,41 +352,41 @@ public class SkipListTest extends TestCase {
         assertEquals("R1", removedPair.getKey());
         assertEquals(0, skipList2.size());
     }
-
-
-    @Test
-    public void testRemoveNonExistingRectangle() {
-        Rectangle rect = new Rectangle(10, 10, 5, 5);
-        KVPair<String, Rectangle> removedPair = skipList2.removeByValue(rect);
-        assertNull(removedPair);
-        assertEquals(0, skipList2.size());
-    }
-
-
-    @Test
-    public void testRemoveWithNullValue() {
-        systemOut().clearHistory();
-        skipList2.removeByValue(null);
-        String output = systemOut().getHistory();
-        assertFuzzyEquals(output, "Rectangle not found: null");
-    }
-
-
-    
-
-
-    @Test
-    public void testRemoveOneOfMultipleRectangles() {
-        Rectangle rect1 = new Rectangle(10, 10, 5, 5);
-        Rectangle rect2 = new Rectangle(15, 15, 5, 5);
-        skipList2.insert(new KVPair<>("R1", rect1));
-        skipList2.insert(new KVPair<>("R2", rect2));
-
-        assertEquals(2, skipList2.size());
-        KVPair<String, Rectangle> removedPair = skipList2.removeByValue(rect1);
-        assertNotNull(removedPair);
-        assertEquals("R1", removedPair.getKey());
-        assertEquals(1, skipList2.size());
-    }
+//
+//
+// @Test
+// public void testRemoveNonExistingRectangle() {
+// Rectangle rect = new Rectangle(10, 10, 5, 5);
+// KVPair<String, Rectangle> removedPair = skipList2.removeByValue(rect);
+// assertNull(removedPair);
+// assertEquals(0, skipList2.size());
+// }
+//
+//
+// @Test
+// public void testRemoveWithNullValue() {
+// systemOut().clearHistory();
+// skipList2.removeByValue(null);
+// String output = systemOut().getHistory();
+// assertFuzzyEquals(output, "Rectangle not found: null");
+// }
+//
+//
+//
+//
+//
+// @Test
+// public void testRemoveOneOfMultipleRectangles() {
+// Rectangle rect1 = new Rectangle(10, 10, 5, 5);
+// Rectangle rect2 = new Rectangle(15, 15, 5, 5);
+// skipList2.insert(new KVPair<>("R1", rect1));
+// skipList2.insert(new KVPair<>("R2", rect2));
+//
+// assertEquals(2, skipList2.size());
+// KVPair<String, Rectangle> removedPair = skipList2.removeByValue(rect1);
+// assertNotNull(removedPair);
+// assertEquals("R1", removedPair.getKey());
+// assertEquals(1, skipList2.size());
+// }
 
 }

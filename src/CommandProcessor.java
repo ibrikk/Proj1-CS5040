@@ -66,7 +66,7 @@ public class CommandProcessor {
             if (numParam == 1) {
                 // Calls remove by name
                 data.remove(arr[1]);
-                
+
             }
             else if (numParam == 4) {
                 // Calls remove by coordinate, converting string

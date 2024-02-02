@@ -243,63 +243,73 @@ public class SkipList<K extends Comparable<? super K>, V>
             System.out.println("Rectangle not found: " + val);
             return null;
         }
-
-        Rectangle rectToRemove = (Rectangle)val;
-        KVPair<K, V> removedPair = null;
-        SkipListIterator iterator = new SkipListIterator();
-
-        // Create an array to store the nodes just before the potential removal
-        // points
-        SkipNode[] update = (SkipNode[])Array.newInstance(
-            SkipList.SkipNode.class, head.level + 1);
-//        SkipNode x = head;
-
-        // Initialize update array
-        for (int i = 0; i < update.length; i++) {
-            update[i] = head;
-        }
-
-        while (iterator.hasNext()) {
-            SkipNode currentNode = iterator.current;
-            // TODO: FIX HERE
-            if (currentNode.element() != null && rectToRemove.equals(currentNode
-                .element().getValue())) {
-                // Found a node to remove
-                for (int i = 0; i <= head.level; i++) {
-                    if (update[i].forward[i] != currentNode) {
-                        break;
-                    }
-                    update[i].forward[i] = currentNode.forward[i];
-                }
-                if (removedPair == null) {
-                    removedPair = currentNode.pair;
-                }
-                size--;
-                System.out.println("Rectangle removed: (" + currentNode.pair
-                    .getKey() + ", " + rectToRemove.toString() + ")");
-                // Move iterator to next node after the removed node
-                iterator.next();
-            }
-            else {
-                // Move to next node and update the update array
-                for (int i = 0; i <= head.level; i++) {
-                    if (iterator.current.forward[i] != null && !rectToRemove
-                        .equals(iterator.current.forward[i].element()
-                            .getValue())) {
-                        update[i] = iterator.current;
-                    }
-                }
-                iterator.next();
-            }
-        }
-// TODO: removedPair is null sometimes
-        if (removedPair == null) {
-            System.out.println("Rectangle not found: " + rectToRemove
-                .toString());
+        SkipNode x = head;
+        SkipNode toBeRemoved = searchByVal(val);
+        if (toBeRemoved == null) {
+            System.out.println("Rectangle not found: " + val);
             return null;
         }
+        SkipNode[] update = (SkipNode[])Array.newInstance(
+            SkipList.SkipNode.class, toBeRemoved.forward.length);
 
-        return removedPair;
+        int currLevel = x.forward.length - 1;
+
+        while (x != null) {
+            for (int i = currLevel; i >= 0; i--) {
+                if (x.forward[i] != null) {
+                    if (x.forward[i] == toBeRemoved) {
+                        x.forward[i] = update[i];
+                    }
+                }
+            }
+            x = x.forward[0];
+            if (x != null) {
+                currLevel = x.forward.length - 1;
+            }
+        }
+
+        size--;
+        System.out.println("Rectangle removed: (" + toBeRemoved.pair.getKey()
+            + ", " + toBeRemoved.pair.getValue().toString() + ")");
+        return toBeRemoved.element();
+
+    }
+
+
+    private SkipNode searchByVal(V val) {
+        SkipNode x = head;
+        int currLevel = head.level - 1;
+
+        if (x.forward.length != 1) {
+            while (x != null) {
+                for (int i = currLevel; i >= 0; i--) {
+                    if (x.forward[i] != null) {
+                        if (val.equals(x.forward[i].element().getValue())) {
+                            x = x.forward[i];
+                            return x;
+                        }
+                    }
+                }
+                x = x.forward[0];
+
+                if (x != null) {
+                    currLevel = x.forward.length - 1;
+                }
+            }
+        }
+        else {
+            while (x != null) {
+                if (x.forward[0] == null) {
+                    return null;
+                }
+                if (val.equals(x.forward[0].element().getValue())) {
+                    x = x.forward[0];
+                    return x;
+                }
+                x = x.forward[0];
+            }
+        }
+        return null;
     }
 
 
