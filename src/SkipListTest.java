@@ -409,17 +409,64 @@ public class SkipListTest extends TestCase {
     }
 
 
+    /**
+     * Tests the removal of elements by key in a SkipList. Verifies that
+     * elements
+     * can be successfully removed using their keys, and that the size of the
+     * SkipList is updated accordingly. It ensures that removing elements
+     * decreases
+     * the size of the SkipList and that the removed elements are correctly
+     * identified.
+     */
     @Test
-    public void testRemove() {
+    public void testRemoveKey() {
         Rectangle rect = new Rectangle(10, 10, 20, 20);
-        skipList1.insert(new KVPair<>("A", rect));
-        Rectangle rect1 = new Rectangle(10, 10, 20, 20);
+        Rectangle rect1 = new Rectangle(15, 15, 25, 25);
+        Rectangle rect2 = new Rectangle(100, 100, 100, 100);
         skipList1.insert(new KVPair<>("A", rect));
         skipList1.insert(new KVPair<>("B", rect1));
+        skipList1.insert(new KVPair<>("C", rect2));
         assertEquals(3, skipList1.size());
-        KVPair<String, Rectangle> removed = skipList1.remove("B");
-        assertNotNull(removed);
-        assertEquals(2, skipList1.size());
+        KVPair<String, Rectangle> removed1 = skipList1.remove("A");
+        KVPair<String, Rectangle> removed2 = skipList1.remove("B");
+        assertNotNull(removed1);
+        assertNotNull(removed2);
+        assertEquals(1, skipList1.size());
+        KVPair<String, Rectangle> removed3 = skipList1.remove("C");
+        assertNotNull(removed3);
+        assertEquals(0, skipList1.size());
+    }
+
+
+    /**
+     * Tests the removal of elements by value in a SkipList. This method
+     * verifies
+     * that elements can be successfully removed using their values
+     * (rectangles),
+     * and ensures that the size of the SkipList is correctly updated after
+     * removal.
+     * It checks that each removal operation effectively decreases the size of
+     * the
+     * SkipList and that the specific elements intended for removal are indeed
+     * removed.
+     */
+    @Test
+    public void testRemoveValue() {
+        Rectangle rect = new Rectangle(10, 10, 20, 20);
+        Rectangle rect1 = new Rectangle(15, 15, 25, 25);
+        Rectangle rect2 = new Rectangle(100, 100, 100, 100);
+        skipList1.insert(new KVPair<>("A", rect));
+        skipList1.insert(new KVPair<>("B", rect1));
+        skipList1.insert(new KVPair<>("C", rect2));
+        assertEquals(3, skipList1.size());
+        KVPair<String, Rectangle> removed1 = skipList1.removeByValue(rect);
+        assertNotNull(removed1);
+        KVPair<String, Rectangle> removed2 = skipList1.removeByValue(rect1);
+        assertNotNull(removed2);
+        assertEquals(1, skipList1.size());
+        KVPair<String, Rectangle> removed3 = skipList1.removeByValue(rect2);
+        assertNotNull(removed3);
+        assertEquals(0, skipList1.size());
     }
 
 }

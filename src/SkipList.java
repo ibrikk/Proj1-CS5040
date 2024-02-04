@@ -249,8 +249,7 @@ public class SkipList<K extends Comparable<? super K>, V>
             System.out.println("Rectangle not found: " + val);
             return null;
         }
-        SkipNode[] update = (SkipNode[])Array.newInstance(
-            SkipList.SkipNode.class, toBeRemoved.forward.length);
+        SkipNode[] update = toBeRemoved.forward;
 
         int currLevel = x.forward.length - 1;
 
@@ -258,7 +257,7 @@ public class SkipList<K extends Comparable<? super K>, V>
             for (int i = currLevel; i >= 0; i--) {
                 if (x.forward[i] != null) {
                     if (x.forward[i] == toBeRemoved) {
-                        x.forward[i] = update[i];
+                        x.forward[i] = update[i]; // made null
                     }
                 }
             }
