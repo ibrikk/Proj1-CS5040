@@ -468,5 +468,19 @@ public class SkipListTest extends TestCase {
         assertNotNull(removed3);
         assertEquals(0, skipList1.size());
     }
+    
+    @Test
+    public void testRemoveValue2() {
+        Rectangle rect = new Rectangle(10, 10, 20, 20);
+        Rectangle rect1 = new Rectangle(15, 15, 25, 25);
+        Rectangle rect2 = new Rectangle(100, 100, 100, 100);
+        skipList1.insert(new KVPair<>("A", rect));
+        skipList1.insert(new KVPair<>("B", rect1));
+        skipList1.insert(new KVPair<>("C", rect2));
+        assertEquals(3, skipList1.size());
+        KVPair<String, Rectangle> removed1 = skipList1.removeByValue(rect1);
+        assertNotNull(removed1);
+        assertEquals(2, skipList1.size());
+    }
 
 }

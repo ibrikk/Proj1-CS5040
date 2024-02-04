@@ -291,9 +291,6 @@ public class SkipList<K extends Comparable<? super K>, V>
                 }
                 x = x.forward[0];
 
-                if (x != null) {
-                    currLevel = x.forward.length - 1;
-                }
             }
         }
         else {
