@@ -32,7 +32,9 @@ import student.TestCase;
  */
 public class SkipListTest extends TestCase {
 
-    private SkipList<String, Rectangle> skipList, skipList1, skipList2;
+    private SkipList<String, Rectangle> skipList;
+    private SkipList<String, Rectangle> skipList1;
+    private SkipList<String, Rectangle> skipList2;
 
     /**
      * Sets up the test fixture.
@@ -468,7 +470,20 @@ public class SkipListTest extends TestCase {
         assertNotNull(removed3);
         assertEquals(0, skipList1.size());
     }
-    
+
+
+    /**
+     * Tests the removal of elements by value in a SkipList. This method
+     * verifies
+     * that elements can be successfully removed using their values
+     * (rectangles),
+     * and ensures that the size of the SkipList is correctly updated after
+     * removal.
+     * It checks that each removal operation effectively decreases the size of
+     * the
+     * SkipList and that the specific elements intended for removal are indeed
+     * removed.
+     */
     @Test
     public void testRemoveValue2() {
         Rectangle rect = new Rectangle(10, 10, 20, 20);
