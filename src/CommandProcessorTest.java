@@ -100,4 +100,61 @@ public class CommandProcessorTest extends TestCase {
             + "(c, 0, 0, 1000, 10 | d, 0, 0, 10, 1000)\r\n"
             + "(d, 0, 0, 10, 1000 | c, 0, 0, 1000, 10)");
     }
+
+    /**
+     * Test remove by name
+     */
+    @Test
+    public void testRemoveByName() {
+        String cmd1 = "insert a 10 10 15 15";
+        String cmd2 = "insert b 11 11 5 5";
+        String cmd3 = "insert c 0 0 1000 10";
+        String cmd4 = "insert d 0 0 10 1000";
+
+        cmdp.processor(cmd1);
+        cmdp.processor(cmd2);
+        cmdp.processor(cmd3);
+        cmdp.processor(cmd4);
+        systemOut().clearHistory();
+        cmdp.processor("remove d");
+        assertFuzzyEquals(systemOut().getHistory(), "rectangle removed d 0 0 10 1000");
+    }
+
+    /**
+     * Test remove by name
+     */
+    @Test
+    public void testRemoveByValues() {
+        String cmd1 = "insert a 10 10 15 15";
+        String cmd2 = "insert b 11 11 5 5";
+        String cmd3 = "insert c 0 0 1000 10";
+        String cmd4 = "insert d 0 0 10 1000";
+
+        cmdp.processor(cmd1);
+        cmdp.processor(cmd2);
+        cmdp.processor(cmd3);
+        cmdp.processor(cmd4);
+        systemOut().clearHistory();
+        cmdp.processor("remove 10 10 15 15");
+        assertFuzzyEquals(systemOut().getHistory(), "rectangle removed a 10 10 15 15");
+    }
+
+    /**
+     * Test remove by name
+     */
+    @Test
+    public void testRemoveByValuesNotValidRectangle() {
+        String cmd1 = "insert a 10 10 15 15";
+        String cmd2 = "insert b 11 11 5 5";
+        String cmd3 = "insert c 0 0 1000 10";
+        String cmd4 = "insert d 0 0 10 1000";
+
+        cmdp.processor(cmd1);
+        cmdp.processor(cmd2);
+        cmdp.processor(cmd3);
+        cmdp.processor(cmd4);
+        systemOut().clearHistory();
+        cmdp.processor("remove 1 1 1 1");
+        assertFuzzyEquals(systemOut().getHistory(), "rectangle not found 1 1 1 1");
+    }
 }
