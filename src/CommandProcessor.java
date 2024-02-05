@@ -60,20 +60,22 @@ public class CommandProcessor {
         }
         // calls the appropriate remove method based on the
         // number of white space delimited strings in the line
-// else if (command.equals("remove")) {
-// // checks the number of white space delimited strings in the line
-// int numParam = arr.length - 1;
-// if (numParam == 1) {
-// // Calls remove by name
-// data.remove(arr[1]);
-//
-// }
-// else if (numParam == 4) {
-// // Calls remove by coordinate, converting string
-// // integers into their Integer equivalent minus whitespace
-// }
-//
-// }
+        else if (command.equals("remove")) {
+            // checks the number of white space delimited strings in the line
+            int numParam = arr.length - 1;
+            if (numParam == 1) {
+                // Calls remove by name
+                data.remove(arr[1]);
+
+            }
+            else if (numParam == 4) {
+                // Calls remove by coordinate, converting string
+                // integers into their Integer equivalent minus whitespace
+                data.remove(Integer.parseInt(arr[1]), Integer.parseInt(arr[2]),
+                    Integer.parseInt(arr[3]), Integer.parseInt(arr[4]));
+            }
+
+        }
         else if (command.equals("regionsearch")) {
             data.regionsearch(Integer.parseInt(arr[1]), Integer.parseInt(
                 arr[2]), Integer.parseInt(arr[3]), Integer.parseInt(arr[4]));

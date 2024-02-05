@@ -48,7 +48,7 @@ public class SkipListProjectTest extends TestCase {
 // String[] args = { "duplicate_test.txt" };
 // String[] args = { "insert_basic.txt" };
 // String[] args = { "P1test1.txt" };
-        String[] args = { "testBigInsert.txt" };
+        String[] args = { "insert_remove_search.txt" };
         systemOut().clearHistory();
         SkipListProject.main(args);
         String output = systemOut().getHistory();
@@ -56,7 +56,8 @@ public class SkipListProjectTest extends TestCase {
         try {
 // referenceOutput = SkipListProject.readFile("duplicate_testout.txt");
 // referenceOutput = SkipListProject.readFile("insert_basicout.txt");
-            referenceOutput = SkipListProject.readFile("testBigInsertout.txt");
+            referenceOutput = SkipListProject.readFile(
+                "insert_remove_searchout.txt");
         }
         catch (IOException e) {
             e.printStackTrace();

@@ -175,6 +175,7 @@ public class SkipList<K extends Comparable<? super K>, V>
         head = newHead; // Update the head reference
     }
 
+
     /**
      * Removes the KVPair that is passed in as a parameter and returns true if
      * the pair was valid and false if not.
@@ -183,10 +184,50 @@ public class SkipList<K extends Comparable<? super K>, V>
      *            the KVPair to be removed
      * @return returns the removed pair if the pair was valid and null if not
      */
-// @SuppressWarnings("unchecked")
-// public KVPair<K, V> remove(K key) {
-// return null;
-// }
+    @SuppressWarnings("unchecked")
+    public KVPair<K, V> remove(K key) {
+        if (key == null) {
+            System.out.println("Rectangle not removed: " + key);
+            return null;
+        }
+
+        // Array to keep track of the nodes that are just before the node to be
+        // removed.
+        SkipNode[] update = (SkipNode[])Array.newInstance(
+            SkipList.SkipNode.class, head.level + 1);
+
+        SkipNode x = head;
+
+        // Find the position just before the node to be removed.
+        for (int i = head.level; i >= 0; i--) {
+            while (x.forward[i] != null && x.forward[i].element().getKey()
+                .compareTo(key) < 0) {
+                x = x.forward[i];
+            }
+            update[i] = x;
+        }
+
+        x = x.forward[0];
+
+        // Remove the node if it has the key.
+        if (x != null && x.element().getKey().compareTo(key) == 0) {
+            for (int i = 0; i <= head.level; i++) {
+                if (update[i].forward[i] != x) {
+                    break;
+                }
+                update[i].forward[i] = x.forward[i];
+            }
+
+            size--;
+            System.out.println("Rectangle removed: (" + x.pair.getKey() + ", "
+                + x.pair.getValue().toString() + ")");
+            return x.pair;
+        }
+
+        // If no rectangle with the key is found, print the appropriate message.
+        System.out.println("Rectangle not removed: " + key);
+        return null;
+    }
 
 
     /**
@@ -196,8 +237,78 @@ public class SkipList<K extends Comparable<? super K>, V>
      *            the value of the KVPair to be removed
      * @return returns true if the removal was successful
      */
+    @SuppressWarnings("unchecked")
     public KVPair<K, V> removeByValue(V val) {
+        if (val == null || !(val instanceof Rectangle)) {
+            System.out.println("Rectangle not found: " + val);
+            return null;
+        }
+        SkipNode x = head;
+        SkipNode toBeRemoved = searchByVal(val);
+        if (toBeRemoved == null) {
+            System.out.println("Rectangle not found: " + val);
+            return null;
+        }
+        SkipNode[] update = (SkipNode[])Array.newInstance(
+            SkipList.SkipNode.class, toBeRemoved.forward.length);
 
+        int currLevel = x.forward.length - 1;
+
+        while (x != null) {
+            for (int i = currLevel; i >= 0; i--) {
+                if (x.forward[i] != null) {
+                    if (x.forward[i] == toBeRemoved) {
+                        x.forward[i] = update[i];
+                    }
+                }
+            }
+            x = x.forward[0];
+            if (x != null) {
+                currLevel = x.forward.length - 1;
+            }
+        }
+
+        size--;
+        System.out.println("Rectangle removed: (" + toBeRemoved.pair.getKey()
+            + ", " + toBeRemoved.pair.getValue().toString() + ")");
+        return toBeRemoved.element();
+
+    }
+
+
+    private SkipNode searchByVal(V val) {
+        SkipNode x = head;
+        int currLevel = head.level - 1;
+
+        if (x.forward.length != 1) {
+            while (x != null) {
+                for (int i = currLevel; i >= 0; i--) {
+                    if (x.forward[i] != null) {
+                        if (val.equals(x.forward[i].element().getValue())) {
+                            x = x.forward[i];
+                            return x;
+                        }
+                    }
+                }
+                x = x.forward[0];
+
+                if (x != null) {
+                    currLevel = x.forward.length - 1;
+                }
+            }
+        }
+        else {
+            while (x != null) {
+                if (x.forward[0] == null) {
+                    return null;
+                }
+                if (val.equals(x.forward[0].element().getValue())) {
+                    x = x.forward[0];
+                    return x;
+                }
+                x = x.forward[0];
+            }
+        }
         return null;
     }
 
