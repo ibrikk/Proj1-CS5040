@@ -32,7 +32,9 @@ import student.TestCase;
  */
 public class SkipListTest extends TestCase {
 
-    private SkipList<String, Rectangle> skipList, skipList1, skipList2;
+    private SkipList<String, Rectangle> skipList;
+    private SkipList<String, Rectangle> skipList1;
+    private SkipList<String, Rectangle> skipList2;
 
     /**
      * Sets up the test fixture.
@@ -409,6 +411,9 @@ public class SkipListTest extends TestCase {
     }
 
 
+    /**
+     * Simple remove operation
+     */
     @Test
     public void testRemove() {
         Rectangle rect = new Rectangle(10, 10, 20, 20);

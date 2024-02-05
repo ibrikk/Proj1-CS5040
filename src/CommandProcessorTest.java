@@ -101,6 +101,7 @@ public class CommandProcessorTest extends TestCase {
             + "(d, 0, 0, 10, 1000 | c, 0, 0, 1000, 10)");
     }
 
+
     /**
      * Test remove by name
      */
@@ -117,8 +118,10 @@ public class CommandProcessorTest extends TestCase {
         cmdp.processor(cmd4);
         systemOut().clearHistory();
         cmdp.processor("remove d");
-        assertFuzzyEquals(systemOut().getHistory(), "rectangle removed d 0 0 10 1000");
+        assertFuzzyEquals(systemOut().getHistory(),
+            "rectangle removed d 0 0 10 1000");
     }
+
 
     /**
      * Test remove by name
@@ -136,8 +139,10 @@ public class CommandProcessorTest extends TestCase {
         cmdp.processor(cmd4);
         systemOut().clearHistory();
         cmdp.processor("remove 10 10 15 15");
-        assertFuzzyEquals(systemOut().getHistory(), "rectangle removed a 10 10 15 15");
+        assertFuzzyEquals(systemOut().getHistory(),
+            "rectangle removed a 10 10 15 15");
     }
+
 
     /**
      * Test remove by name
@@ -155,6 +160,7 @@ public class CommandProcessorTest extends TestCase {
         cmdp.processor(cmd4);
         systemOut().clearHistory();
         cmdp.processor("remove 1 1 1 1");
-        assertFuzzyEquals(systemOut().getHistory(), "rectangle not found 1 1 1 1");
+        assertFuzzyEquals(systemOut().getHistory(),
+            "rectangle not found 1 1 1 1");
     }
 }
