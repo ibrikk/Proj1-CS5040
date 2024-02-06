@@ -552,13 +552,10 @@ public class SkipListTest extends TestCase {
         // Attempt to remove a non-existent value
         KVPair<String, Rectangle> result = skipList3.removeByValue(
             new Rectangle(100, 100, 100, 100));
-        assertNull(
-            "Expected null when trying to remove a value not present in the list",
-            result);
+        assertNull(result);
 
         // Ensure the list's size remains unchanged
-        assertEquals("Expected the size of the list to remain unchanged", 3,
-            skipList3.size());
+        assertEquals(3, skipList3.size());
     }
 
 
@@ -572,12 +569,10 @@ public class SkipListTest extends TestCase {
     public void testSearchFoundRectangles() {
         // Perform a search for an existing key
         ArrayList<KVPair<String, Rectangle>> found = skipList3.search("Node2");
-        assertFalse("Expected non-empty result when searching for existing key",
-            found.isEmpty());
+        assertFalse(found.isEmpty());
 
         // Verify the correctness of the found KV pairs
-        assertEquals("Expected exactly one result for key 'Node2'", 1, found
-            .size());
+        assertEquals(1, found.size());
         KVPair<String, Rectangle> resultPair = found.get(0);
         assertEquals("Expected to find key 'Node2'", "Node2", resultPair
             .getKey());
@@ -598,9 +593,7 @@ public class SkipListTest extends TestCase {
         // Search for a key that does not exist
         ArrayList<KVPair<String, Rectangle>> found = skipList3.search(
             "NonExistentKey");
-        assertTrue(
-            "Expected empty result when searching for a key that does not exist",
-            found.isEmpty());
+        assertTrue(found.isEmpty());
     }
 
 
@@ -617,9 +610,8 @@ public class SkipListTest extends TestCase {
             10, 20, 20));
         int initialSize = skipList.size();
         skipList.insert(pair);
-        assertEquals(
-            "SkipList size should increment by 1 after inserting a non-null KVPair",
-            initialSize + 1, skipList.size());
+        assertEquals("SkipList size should increment by 1 after "
+            + "inserting a non-null KVPair", initialSize + 1, skipList.size());
     }
 
 
