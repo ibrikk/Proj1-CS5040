@@ -305,9 +305,8 @@ public class RectangleTest extends TestCase {
      */
     @Test
     public void testIntersectWithNullRectangle() {
-        assertFalse(
-            "intersect method should return false when the input is null",
-            rectGlobal.intersect(null));
+        assertFalse("intersect method should return false "
+            + "when the input is null", rectGlobal.intersect(null));
     }
 
 
@@ -318,9 +317,7 @@ public class RectangleTest extends TestCase {
     @Test
     public void testEqualityWithSameYCoordinate() {
         Rectangle sameYDifferentOthers = new Rectangle(10, 20, 31, 40);
-        assertFalse(
-            "Rectangles should not be equal if they differ in any property other than yCoordinate",
-            rectGlobal.equals(sameYDifferentOthers));
+        assertFalse(rectGlobal.equals(sameYDifferentOthers));
     }
 
 
@@ -331,9 +328,7 @@ public class RectangleTest extends TestCase {
     @Test
     public void testEqualityWithSameWidth() {
         Rectangle sameWidthDifferentOthers = new Rectangle(10, 21, 30, 40);
-        assertFalse(
-            "Rectangles should not be equal if they differ in any property other than width",
-            rectGlobal.equals(sameWidthDifferentOthers));
+        assertFalse(rectGlobal.equals(sameWidthDifferentOthers));
     }
 
 
@@ -343,9 +338,7 @@ public class RectangleTest extends TestCase {
     @Test
     public void testEqualityWithIdenticalProperties() {
         Rectangle identical = new Rectangle(10, 10, 20, 20);
-        assertTrue(
-            "Rectangles should be equal if all properties (xCoordinate, yCoordinate, width, height) are identical",
-            rectGlobal.equals(identical));
+        assertTrue(rectGlobal.equals(identical));
     }
 
 
@@ -355,9 +348,7 @@ public class RectangleTest extends TestCase {
     @Test
     public void testInequalityDueToDifferentYCoordinate() {
         Rectangle differentY = new Rectangle(10, 21, 30, 40);
-        assertFalse(
-            "Rectangles should not be equal if their yCoordinates differ",
-            rectGlobal.equals(differentY));
+        assertFalse(rectGlobal.equals(differentY));
     }
 
 
@@ -367,8 +358,7 @@ public class RectangleTest extends TestCase {
     @Test
     public void testInequalityDueToDifferentWidth() {
         Rectangle differentWidth = new Rectangle(10, 20, 31, 40);
-        assertFalse("Rectangles should not be equal if their widths differ",
-            rectGlobal.equals(differentWidth));
+        assertFalse(rectGlobal.equals(differentWidth));
     }
 
 
@@ -378,8 +368,7 @@ public class RectangleTest extends TestCase {
     @Test
     public void testInequalityDueToDifferentHeight() {
         Rectangle differentHeight = new Rectangle(10, 20, 30, 41);
-        assertFalse("Rectangles should not be equal if their heights differ",
-            rectGlobal.equals(differentHeight));
+        assertFalse(rectGlobal.equals(differentHeight));
     }
 
 
@@ -389,9 +378,7 @@ public class RectangleTest extends TestCase {
     @Test
     public void testInequalityDueToDifferentXCoordinate() {
         Rectangle differentX = new Rectangle(11, 20, 30, 40);
-        assertFalse(
-            "Rectangles should not be equal if their xCoordinates differ",
-            rectGlobal.equals(differentX));
+        assertFalse(rectGlobal.equals(differentX));
     }
 
 
@@ -402,8 +389,7 @@ public class RectangleTest extends TestCase {
     @Test
     public void testRectangleWithinBoundaries() {
         Rectangle rect = new Rectangle(100, 100, 800, 800);
-        assertFalse("Rectangle within 1024x1024 boundaries should be valid",
-            rect.isInvalid());
+        assertFalse(rect.isInvalid());
     }
 
 
@@ -414,8 +400,7 @@ public class RectangleTest extends TestCase {
     @Test
     public void testRectangleExceedsRightBoundary() {
         Rectangle rect = new Rectangle(500, 100, 600, 500);
-        assertTrue("Rectangle exceeding right boundary should be invalid", rect
-            .isInvalid());
+        assertTrue(rect.isInvalid());
     }
 
 
@@ -427,8 +412,7 @@ public class RectangleTest extends TestCase {
     public void testRectangleExceedsBottomBoundary() {
         // y + height = 1100 > 1024
         Rectangle rect = new Rectangle(100, 900, 400, 200);
-        assertTrue("Rectangle exceeding bottom boundary should be invalid", rect
-            .isInvalid());
+        assertTrue(rect.isInvalid());
     }
 
 
@@ -439,9 +423,7 @@ public class RectangleTest extends TestCase {
     @Test
     public void testRectangleOnBoundaryEdge() {
         Rectangle rect = new Rectangle(0, 0, 1024, 1024);
-        assertFalse(
-            "Rectangle on the edge of 1024x1024 boundaries should be valid",
-            rect.isInvalid());
+        assertFalse(rect.isInvalid());
     }
 
 
@@ -454,12 +436,8 @@ public class RectangleTest extends TestCase {
         Rectangle rectExceedsWidth = new Rectangle(1023, 10, 2, 10);
         Rectangle rectExceedsHeight = new Rectangle(10, 1023, 10, 2);
 
-        assertTrue(
-            "Rectangle exceeding boundary due to width should be invalid",
-            rectExceedsWidth.isInvalid());
-        assertTrue(
-            "Rectangle exceeding boundary due to height should be invalid",
-            rectExceedsHeight.isInvalid());
+        assertTrue(rectExceedsWidth.isInvalid());
+        assertTrue(rectExceedsHeight.isInvalid());
     }
 
 }

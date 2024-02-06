@@ -493,9 +493,13 @@ public class SkipListTest extends TestCase {
 
 
     /**
-     * Method under test (assuming it's within the same class for the sake of
-     * example)
-     **/
+     * Calculates a random level for a skip list node using a probabilistic
+     * approach.
+     * Levels increment by 1 for each even result from a random number until an
+     * odd result is obtained.
+     * 
+     * @return The generated random level, starting at 0.
+     */
     public int randomLevel() {
         int lev;
         Random value = new Random();
