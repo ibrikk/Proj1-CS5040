@@ -187,7 +187,7 @@ public class SkipList<K extends Comparable<? super K>, V>
     @SuppressWarnings("unchecked")
     public KVPair<K, V> remove(K key) {
         if (key == null) {
-            System.out.println("Rectangle not removed: " + key);
+            System.out.println("Rectangle not removed: null");
             return null;
         }
 
