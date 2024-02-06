@@ -385,9 +385,8 @@ public class SkipListTest extends TestCase {
     @Test
     public void testRemoveWithNullValue() {
         systemOut().clearHistory();
-        skipList2.removeByValue(null);
-        String output = systemOut().getHistory();
-        assertFuzzyEquals(output, "Rectangle not found: null");
+        KVPair<String, Rectangle> result = skipList2.removeByValue(null);
+        assertNull(result);
     }
 
 
