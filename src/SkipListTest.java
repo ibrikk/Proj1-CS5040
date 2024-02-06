@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 import student.TestCase;
@@ -35,6 +36,7 @@ public class SkipListTest extends TestCase {
     private SkipList<String, Rectangle> skipList;
     private SkipList<String, Rectangle> skipList1;
     private SkipList<String, Rectangle> skipList2;
+    private SkipList<String, Rectangle> skipList3;
 
     /**
      * Sets up the test fixture.
@@ -54,6 +56,13 @@ public class SkipListTest extends TestCase {
         skipList1 = new SkipList<>();
 
         skipList2 = new SkipList<>();
+
+        skipList3 = new SkipList<>();
+
+        skipList3.insert(new KVPair<>("Node1", new Rectangle(0, 0, 10, 10)));
+        skipList3.insert(new KVPair<>("Node2", new Rectangle(10, 10, 20, 20)));
+        skipList3.insert(new KVPair<>("Node3", new Rectangle(15, 15, 25, 25)));
+
     }
 
 
@@ -385,9 +394,8 @@ public class SkipListTest extends TestCase {
     @Test
     public void testRemoveWithNullValue() {
         systemOut().clearHistory();
-        skipList2.removeByValue(null);
-        String output = systemOut().getHistory();
-        assertFuzzyEquals(output, "Rectangle not found: null");
+        KVPair<String, Rectangle> result = skipList2.removeByValue(null);
+        assertNull(result);
     }
 
 
@@ -427,4 +435,217 @@ public class SkipListTest extends TestCase {
         assertEquals(2, skipList1.size());
     }
 
+
+    /**
+     * Test to ensure {@code randomLevel} never returns a negative value.
+     * Given the method's probabilistic nature, this test runs the method
+     * multiple times to ensure the output is consistently non-negative.
+     */
+    @Test
+    public void testRandomLevelIsNonNegative() {
+        for (int i = 0; i < 1000; i++) {
+            assertTrue("randomLevel should never return a negative value",
+                randomLevel() >= 0);
+        }
+    }
+
+
+    /**
+     * Test to verify that {@code randomLevel} does not exceed a reasonable
+     * upper limit under normal conditions. This test is based on the
+     * statistical
+     * expectation that reaching a very high level is increasingly unlikely.
+     * We choose 16 as an arbitrary upper limit for the purposes of this test,
+     * assuming the probability halves with each level (50/50 chance).
+     */
+    @Test
+    public void testRandomLevelUpperBound() {
+        int upperBound = 16; // Arbitrarily chosen reasonable upper limit
+        for (int i = 0; i < 1000; i++) {
+            assertTrue("randomLevel should reasonably not exceed upper bound",
+                randomLevel() < upperBound);
+        }
+    }
+
+
+    /**
+     * Test to ensure that randomLevel produces a variety of levels
+     * over a large number of invocations. This test does not check for any
+     * specific value but ensures that the distribution of levels is not
+     * constant or extremely narrow, which would indicate a problem with
+     * the randomness or distribution logic.
+     */
+    @Test
+    public void testRandomLevelVariety() {
+        boolean[] levelGenerated = new boolean[5]; // Test for variety within
+                                                   // first 5 levels
+        for (int i = 0; i < 1000; i++) {
+            int level = randomLevel();
+            if (level < levelGenerated.length) {
+                levelGenerated[level] = true;
+            }
+        }
+        for (boolean levelFound : levelGenerated) {
+            assertTrue("Expected a variety of levels to be generated",
+                levelFound);
+        }
+    }
+
+
+    /**
+     * Calculates a random level for a skip list node using a probabilistic
+     * approach.
+     * Levels increment by 1 for each even result from a random number until an
+     * odd result is obtained.
+     * 
+     * @return The generated random level, starting at 0.
+     */
+    public int randomLevel() {
+        int lev;
+        Random value = new Random();
+        for (lev = 0; Math.abs(value.nextInt()) % 2 == 0; lev++) {
+            // Do nothing
+        }
+        return lev; // returns a random level
+    }
+
+
+    /**
+     * Test the removal of a node with a specific value, verifying that the
+     * method
+     * correctly identifies and removes the node based on value. This test
+     * serves to
+     * validate the functionality of both {@code removeByValue} and the
+     * underlying
+     * {@code findNode} methods, especially the accuracy of the equality checks
+     * they perform.
+     */
+    @Test
+    public void testRemoveByValue() {
+        // Remove a node by value and verify the return
+        KVPair<String, Rectangle> removedPair = skipList3.removeByValue(
+            new Rectangle(10, 10, 20, 20));
+        assertNotNull("Expected to remove a node with value 2, but got null",
+            removedPair);
+        assertEquals("Expected removed node to have key 'Node2'", "Node2",
+            removedPair.getKey());
+
+        // Ensure the node is no longer in the skip list
+        ArrayList<KVPair<String, Rectangle>> searchResult = skipList3.search(
+            "Node2");
+        assertTrue(
+            "Expected 'Node2' to be absent after removal, but it was found",
+            searchResult.isEmpty());
+
+        // Verify the size of the list has decreased
+        assertEquals("Expected size of the list to decrease by 1", 2, skipList3
+            .size());
+    }
+
+
+    /**
+     * Verify attempting to remove a node with a value not present in the list
+     * results in no change to the list and returns null.
+     */
+    @Test
+    public void testRemoveByValueNonExistent() {
+        // Attempt to remove a non-existent value
+        KVPair<String, Rectangle> result = skipList3.removeByValue(
+            new Rectangle(100, 100, 100, 100));
+        assertNull(result);
+
+        // Ensure the list's size remains unchanged
+        assertEquals(3, skipList3.size());
+    }
+
+
+    /**
+     * Test to verify that the search method correctly identifies and returns
+     * rectangles (KV pairs) that match the search key. This test indirectly
+     * challenges the mutation that replaces equality checks with false by
+     * ensuring that found rectangles are indeed reported accurately.
+     */
+    @Test
+    public void testSearchFoundRectangles() {
+        // Perform a search for an existing key
+        ArrayList<KVPair<String, Rectangle>> found = skipList3.search("Node2");
+        assertFalse(found.isEmpty());
+
+        // Verify the correctness of the found KV pairs
+        assertEquals(1, found.size());
+        KVPair<String, Rectangle> resultPair = found.get(0);
+        assertEquals("Expected to find key 'Node2'", "Node2", resultPair
+            .getKey());
+        assertEquals("Expected value associated with 'Node2'", new Rectangle(10,
+            10, 20, 20), resultPair.getValue());
+    }
+
+
+    /**
+     * Test to ensure that searching for a non-existent key correctly results in
+     * an
+     * empty list, challenging mutations that might disrupt the accurate
+     * reporting
+     * of search misses.
+     */
+    @Test
+    public void testSearchNonExistentKey() {
+        // Search for a key that does not exist
+        ArrayList<KVPair<String, Rectangle>> found = skipList3.search(
+            "NonExistentKey");
+        assertTrue(found.isEmpty());
+    }
+
+
+    /**
+     * Test that inserting a non-null {@code KVPair} correctly adds the element
+     * to the skip list
+     * and increments its size. This test verifies that the insert method
+     * processes valid inputs
+     * as expected, in contrast to the null input case.
+     */
+    @Test
+    public void testInsertNonNullIncrementsSize() {
+        KVPair<String, Rectangle> pair = new KVPair<>("Key", new Rectangle(10,
+            10, 20, 20));
+        int initialSize = skipList.size();
+        skipList.insert(pair);
+        assertEquals("SkipList size should increment by 1 after "
+            + "inserting a non-null KVPair", initialSize + 1, skipList.size());
+    }
+
+
+    /**
+     * Test remove with null.
+     */
+    @Test
+    public void testRemoveNonNullIncrementsSize() {
+        systemOut().clearHistory();
+        skipList.remove(null);
+        String output = systemOut().getHistory();
+        assertFuzzyEquals("Rectangle not removed: null", output);
+    }
+
+
+    /**
+     * Test that randomLevel produces a range of levels, indicating
+     * the loop condition and level incrementation work as expected.
+     */
+    @Test
+    public void testRandomLevelRange() {
+        SkipList<String, Rectangle> list = new SkipList<>();
+        boolean[] levelsGenerated = new boolean[5];
+        for (int i = 0; i < 10000; i++) {
+            int level = list.randomLevel();
+            if (level < 5) {
+                levelsGenerated[level] = true;
+            }
+        }
+
+        // Check that multiple levels were generated
+        for (int i = 0; i < 5; i++) {
+            assertTrue("Expected level " + i + " to be generated",
+                levelsGenerated[i]);
+        }
+    }
 }

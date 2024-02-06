@@ -11,13 +11,15 @@ import student.TestCase;
  */
 public class RectangleTest extends TestCase {
 
+    private Rectangle rectGlobal;
+
     /**
      * Sets up the test fixture.
      * Called before every test case method.
      */
     @Before
     public void setUp() {
-        // Nothing Here
+        rectGlobal = new Rectangle(10, 10, 20, 20);
     }
 
 
@@ -41,8 +43,7 @@ public class RectangleTest extends TestCase {
     @Test
     public void testNonIntersectingRectangles() {
         Rectangle rect1 = new Rectangle(10, 10, 20, 20);
-        Rectangle rect2 = new Rectangle(40, 40, 20, 20); // Does not overlap
-                                                         // with rect1
+        Rectangle rect2 = new Rectangle(40, 40, 20, 20);
         assertFalse(rect1.intersect(rect2));
         assertFalse(rect2.intersect(rect1)); // Test symmetry
     }
@@ -55,8 +56,7 @@ public class RectangleTest extends TestCase {
     @Test
     public void testNotIntersectingEdgeRectangles() {
         Rectangle rect1 = new Rectangle(10, 10, 20, 20);
-        Rectangle rect2 = new Rectangle(30, 10, 20, 20); // Touches the edge of
-                                                         // rect1
+        Rectangle rect2 = new Rectangle(30, 10, 20, 20);
         assertFalse(rect1.intersect(rect2));
 
         assertFalse(rect2.intersect(rect1));
@@ -292,6 +292,152 @@ public class RectangleTest extends TestCase {
     public void testValidRectangle() {
         Rectangle rect = new Rectangle(0, 0, 10, 10);
         assertFalse(rect.isInvalid());
+    }
+
+
+    /**
+     * Test to ensure that the intersect method returns false when called with a
+     * null
+     * rectangle. This case is important for mutation testing, especially to
+     * verify that
+     * the method correctly handles null inputs without causing a
+     * NullPointerException.
+     */
+    @Test
+    public void testIntersectWithNullRectangle() {
+        assertFalse("intersect method should return false "
+            + "when the input is null", rectGlobal.intersect(null));
+    }
+
+
+    /**
+     * Tests equality when two rectangles have the same yCoordinate but differ
+     * in other properties.
+     */
+    @Test
+    public void testEqualityWithSameYCoordinate() {
+        Rectangle sameYDifferentOthers = new Rectangle(10, 20, 31, 40);
+        assertFalse(rectGlobal.equals(sameYDifferentOthers));
+    }
+
+
+    /**
+     * Tests equality when two rectangles have the same width but differ in
+     * other properties.
+     */
+    @Test
+    public void testEqualityWithSameWidth() {
+        Rectangle sameWidthDifferentOthers = new Rectangle(10, 21, 30, 40);
+        assertFalse(rectGlobal.equals(sameWidthDifferentOthers));
+    }
+
+
+    /**
+     * Tests equality when two rectangles have identical properties.
+     */
+    @Test
+    public void testEqualityWithIdenticalProperties() {
+        Rectangle identical = new Rectangle(10, 10, 20, 20);
+        assertTrue(rectGlobal.equals(identical));
+    }
+
+
+    /**
+     * Tests inequality due to different yCoordinates.
+     */
+    @Test
+    public void testInequalityDueToDifferentYCoordinate() {
+        Rectangle differentY = new Rectangle(10, 21, 30, 40);
+        assertFalse(rectGlobal.equals(differentY));
+    }
+
+
+    /**
+     * Tests inequality due to different widths.
+     */
+    @Test
+    public void testInequalityDueToDifferentWidth() {
+        Rectangle differentWidth = new Rectangle(10, 20, 31, 40);
+        assertFalse(rectGlobal.equals(differentWidth));
+    }
+
+
+    /**
+     * Tests inequality due to different heights.
+     */
+    @Test
+    public void testInequalityDueToDifferentHeight() {
+        Rectangle differentHeight = new Rectangle(10, 20, 30, 41);
+        assertFalse(rectGlobal.equals(differentHeight));
+    }
+
+
+    /**
+     * Tests inequality due to different xCoordinates.
+     */
+    @Test
+    public void testInequalityDueToDifferentXCoordinate() {
+        Rectangle differentX = new Rectangle(11, 20, 30, 40);
+        assertFalse(rectGlobal.equals(differentX));
+    }
+
+
+    /**
+     * Test that a rectangle well within the 1024x1024 boundaries is considered
+     * valid.
+     */
+    @Test
+    public void testRectangleWithinBoundaries() {
+        Rectangle rect = new Rectangle(100, 100, 800, 800);
+        assertFalse(rect.isInvalid());
+    }
+
+
+    /**
+     * Test that a rectangle that exceeds the 1024x1024 boundaries on the right
+     * edge is considered invalid.
+     */
+    @Test
+    public void testRectangleExceedsRightBoundary() {
+        Rectangle rect = new Rectangle(500, 100, 600, 500);
+        assertTrue(rect.isInvalid());
+    }
+
+
+    /**
+     * Test that a rectangle that exceeds the 1024x1024 boundaries on the bottom
+     * edge is considered invalid.
+     */
+    @Test
+    public void testRectangleExceedsBottomBoundary() {
+        // y + height = 1100 > 1024
+        Rectangle rect = new Rectangle(100, 900, 400, 200);
+        assertTrue(rect.isInvalid());
+    }
+
+
+    /**
+     * Test that a rectangle right on the edge of the 1024x1024 world box
+     * without exceeding is considered valid.
+     */
+    @Test
+    public void testRectangleOnBoundaryEdge() {
+        Rectangle rect = new Rectangle(0, 0, 1024, 1024);
+        assertFalse(rect.isInvalid());
+    }
+
+
+    /**
+     * Test that a rectangle's width or height alone causing it to exceed the
+     * boundary is checked and considered invalid.
+     */
+    @Test
+    public void testRectangleExceedingBoundaryWithSize() {
+        Rectangle rectExceedsWidth = new Rectangle(1023, 10, 2, 10);
+        Rectangle rectExceedsHeight = new Rectangle(10, 1023, 10, 2);
+
+        assertTrue(rectExceedsWidth.isInvalid());
+        assertTrue(rectExceedsHeight.isInvalid());
     }
 
 }

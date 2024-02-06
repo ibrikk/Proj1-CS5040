@@ -187,7 +187,7 @@ public class SkipList<K extends Comparable<? super K>, V>
     @SuppressWarnings("unchecked")
     public KVPair<K, V> remove(K key) {
         if (key == null) {
-            System.out.println("Rectangle not removed: " + key);
+            System.out.println("Rectangle not removed: null");
             return null;
         }
 
@@ -235,78 +235,65 @@ public class SkipList<K extends Comparable<? super K>, V>
      *
      * @param val
      *            the value of the KVPair to be removed
-     * @return returns true if the removal was successful
+     * @return returns pair if the removal was successful
      */
-    @SuppressWarnings("unchecked")
     public KVPair<K, V> removeByValue(V val) {
-        if (val == null || !(val instanceof Rectangle)) {
-            System.out.println("Rectangle not found: " + val);
+
+        SkipNode currentNode = head;
+        SkipNode nodeToRemove = findNode(val);
+        if (nodeToRemove == null) {
+            System.out.println("Rectangle not found: (" + val + ")");
             return null;
         }
-        SkipNode x = head;
-        SkipNode toBeRemoved = searchByVal(val);
-        if (toBeRemoved == null) {
-            System.out.println("Rectangle not found: " + val);
-            return null;
-        }
-        SkipNode[] update = (SkipNode[])Array.newInstance(
-            SkipList.SkipNode.class, toBeRemoved.forward.length);
-
-        int currLevel = x.forward.length - 1;
-
-        while (x != null) {
-            for (int i = currLevel; i >= 0; i--) {
-                if (x.forward[i] != null) {
-                    if (x.forward[i] == toBeRemoved) {
-                        x.forward[i] = update[i];
-                    }
+        SkipNode[] nextNodes = nodeToRemove.forward;
+        int levelIndex = currentNode.forward.length - 1;
+        while (currentNode != null) {
+            for (int i = levelIndex; i >= 0; i--) {
+                if (currentNode.forward[i] != null) {
+                    if ((currentNode.forward[i] == nodeToRemove))
+                        currentNode.forward[i] = nextNodes[i];
                 }
             }
-            x = x.forward[0];
-            if (x != null) {
-                currLevel = x.forward.length - 1;
-            }
+            currentNode = currentNode.forward[0];
+            if (currentNode != null)
+                levelIndex = currentNode.forward.length - 1;
         }
-
         size--;
-        System.out.println("Rectangle removed: (" + toBeRemoved.pair.getKey()
-            + ", " + toBeRemoved.pair.getValue().toString() + ")");
-        return toBeRemoved.element();
-
+        System.out.println("Rectangle removed: (" + nodeToRemove.pair.getKey()
+            + " " + nodeToRemove.pair.getValue().toString() + ")");
+        return nodeToRemove.pair;
     }
 
 
-    private SkipNode searchByVal(V val) {
-        SkipNode x = head;
-        int currLevel = head.level - 1;
-
-        if (x.forward.length != 1) {
-            while (x != null) {
-                for (int i = currLevel; i >= 0; i--) {
-                    if (x.forward[i] != null) {
-                        if (val.equals(x.forward[i].element().getValue())) {
-                            x = x.forward[i];
-                            return x;
+    private SkipNode findNode(V target) {
+        SkipNode searchNode = head;
+        int currentLevel = head.level - 1;
+        if (searchNode.forward.length != 1) {
+            while (searchNode != null) {
+                for (int i = currentLevel; i >= 0; i--) {
+                    if (searchNode.forward[i] != null) {
+                        if (target.equals(searchNode.forward[i].element()
+                            .getValue())) {
+                            searchNode = searchNode.forward[i];
+                            return searchNode;
                         }
                     }
                 }
-                x = x.forward[0];
-
-                if (x != null) {
-                    currLevel = x.forward.length - 1;
+                searchNode = searchNode.forward[0];
+                if (searchNode != null) {
+                    currentLevel = searchNode.forward.length - 1;
                 }
             }
         }
         else {
-            while (x != null) {
-                if (x.forward[0] == null) {
+            while (searchNode != null) {
+                if (searchNode.forward[0] == null)
                     return null;
+                if (target.equals(searchNode.forward[0].element().getValue())) {
+                    searchNode = searchNode.forward[0];
+                    return searchNode;
                 }
-                if (val.equals(x.forward[0].element().getValue())) {
-                    x = x.forward[0];
-                    return x;
-                }
-                x = x.forward[0];
+                searchNode = searchNode.forward[0];
             }
         }
         return null;
