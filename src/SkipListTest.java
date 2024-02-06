@@ -625,4 +625,27 @@ public class SkipListTest extends TestCase {
         String output = systemOut().getHistory();
         assertFuzzyEquals("Rectangle not removed: null", output);
     }
+
+
+    /**
+     * Test that randomLevel produces a range of levels, indicating
+     * the loop condition and level incrementation work as expected.
+     */
+    @Test
+    public void testRandomLevelRange() {
+        SkipList<String, Rectangle> list = new SkipList<>();
+        boolean[] levelsGenerated = new boolean[5];
+        for (int i = 0; i < 10000; i++) {
+            int level = list.randomLevel();
+            if (level < 5) {
+                levelsGenerated[level] = true;
+            }
+        }
+
+        // Check that multiple levels were generated
+        for (int i = 0; i < 5; i++) {
+            assertTrue("Expected level " + i + " to be generated",
+                levelsGenerated[i]);
+        }
+    }
 }
