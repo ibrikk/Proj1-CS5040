@@ -492,8 +492,10 @@ public class SkipListTest extends TestCase {
     }
 
 
-    // Method under test (assuming it's within the same class for the sake of
-    // example)
+    /**
+     * Method under test (assuming it's within the same class for the sake of
+     * example)
+     **/
     public int randomLevel() {
         int lev;
         Random value = new Random();

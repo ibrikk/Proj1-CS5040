@@ -43,8 +43,7 @@ public class RectangleTest extends TestCase {
     @Test
     public void testNonIntersectingRectangles() {
         Rectangle rect1 = new Rectangle(10, 10, 20, 20);
-        Rectangle rect2 = new Rectangle(40, 40, 20, 20); // Does not overlap
-                                                         // with rect1
+        Rectangle rect2 = new Rectangle(40, 40, 20, 20);
         assertFalse(rect1.intersect(rect2));
         assertFalse(rect2.intersect(rect1)); // Test symmetry
     }
@@ -57,8 +56,7 @@ public class RectangleTest extends TestCase {
     @Test
     public void testNotIntersectingEdgeRectangles() {
         Rectangle rect1 = new Rectangle(10, 10, 20, 20);
-        Rectangle rect2 = new Rectangle(30, 10, 20, 20); // Touches the edge of
-                                                         // rect1
+        Rectangle rect2 = new Rectangle(30, 10, 20, 20);
         assertFalse(rect1.intersect(rect2));
 
         assertFalse(rect2.intersect(rect1));
@@ -319,10 +317,7 @@ public class RectangleTest extends TestCase {
      */
     @Test
     public void testEqualityWithSameYCoordinate() {
-        Rectangle sameYDifferentOthers = new Rectangle(10, 20, 31, 40); // Only
-                                                                        // width
-                                                                        // is
-                                                                        // different
+        Rectangle sameYDifferentOthers = new Rectangle(10, 20, 31, 40);
         assertFalse(
             "Rectangles should not be equal if they differ in any property other than yCoordinate",
             rectGlobal.equals(sameYDifferentOthers));
@@ -335,10 +330,7 @@ public class RectangleTest extends TestCase {
      */
     @Test
     public void testEqualityWithSameWidth() {
-        Rectangle sameWidthDifferentOthers = new Rectangle(10, 21, 30, 40); // Only
-                                                                            // yCoordinate
-                                                                            // is
-                                                                            // different
+        Rectangle sameWidthDifferentOthers = new Rectangle(10, 21, 30, 40);
         assertFalse(
             "Rectangles should not be equal if they differ in any property other than width",
             rectGlobal.equals(sameWidthDifferentOthers));
@@ -421,8 +413,7 @@ public class RectangleTest extends TestCase {
      */
     @Test
     public void testRectangleExceedsRightBoundary() {
-        Rectangle rect = new Rectangle(500, 100, 600, 500); // x + width = 1100
-                                                            // > 1024
+        Rectangle rect = new Rectangle(500, 100, 600, 500);
         assertTrue("Rectangle exceeding right boundary should be invalid", rect
             .isInvalid());
     }
@@ -434,8 +425,8 @@ public class RectangleTest extends TestCase {
      */
     @Test
     public void testRectangleExceedsBottomBoundary() {
-        Rectangle rect = new Rectangle(100, 900, 400, 200); // y + height = 1100
-                                                            // > 1024
+        // y + height = 1100 > 1024
+        Rectangle rect = new Rectangle(100, 900, 400, 200);
         assertTrue("Rectangle exceeding bottom boundary should be invalid", rect
             .isInvalid());
     }
@@ -447,8 +438,7 @@ public class RectangleTest extends TestCase {
      */
     @Test
     public void testRectangleOnBoundaryEdge() {
-        Rectangle rect = new Rectangle(0, 0, 1024, 1024); // Exactly fits the
-                                                          // world box
+        Rectangle rect = new Rectangle(0, 0, 1024, 1024);
         assertFalse(
             "Rectangle on the edge of 1024x1024 boundaries should be valid",
             rect.isInvalid());
@@ -461,12 +451,8 @@ public class RectangleTest extends TestCase {
      */
     @Test
     public void testRectangleExceedingBoundaryWithSize() {
-        Rectangle rectExceedsWidth = new Rectangle(1023, 10, 2, 10); // Exceeds
-                                                                     // due to
-                                                                     // width
-        Rectangle rectExceedsHeight = new Rectangle(10, 1023, 10, 2); // Exceeds
-                                                                      // due to
-                                                                      // height
+        Rectangle rectExceedsWidth = new Rectangle(1023, 10, 2, 10);
+        Rectangle rectExceedsHeight = new Rectangle(10, 1023, 10, 2);
 
         assertTrue(
             "Rectangle exceeding boundary due to width should be invalid",
